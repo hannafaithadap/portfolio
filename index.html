@@ -1,0 +1,679 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#163B31">
+  <meta name="description" content="The portfolio of Hanna Faith Adap — social media manager, content creator, graphic designer, and virtual professional.">
+  <title>Hanna Faith Adap</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@1,500&family=Roboto+Condensed:wght@700;800;900&family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,400,0,0" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            ink: "rgb(var(--ink) / <alpha-value>)",
+            foreground: "rgb(var(--foreground) / <alpha-value>)",
+            paper: "rgb(var(--paper) / <alpha-value>)",
+            stone: "rgb(var(--stone) / <alpha-value>)",
+            "warm-white": "rgb(var(--warm-white) / <alpha-value>)"
+          },
+          fontFamily: {
+            sans: ["DM Sans", "sans-serif"],
+            display: ["DM Sans", "sans-serif"],
+            script: ["Playfair Display", "serif"]
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: 22 59 49;
+      --foreground: 22 59 49;
+      --paper: 240 236 225;
+      --stone: 177 137 99;
+      --warm-white: 240 236 225;
+    }
+
+    :root[data-theme="dark"] {
+      color-scheme: dark;
+      --ink: 22 25 22;
+      --foreground: 235 235 225;
+      --paper: 235 235 225;
+      --stone: 201 161 117;
+      --warm-white: 34 39 35;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: rgb(var(--ink)); font-family: "DM Sans", sans-serif; }
+    ::selection { color: rgb(var(--ink)); background: rgb(var(--paper)); }
+
+    .portrait-backdrop { isolation: isolate; }
+
+    .tool-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: .45rem;
+      border: 1px solid rgb(var(--paper) / .16);
+      border-radius: 9999px;
+      background: rgb(var(--paper) / .06);
+      padding: .4rem .7rem;
+      color: rgb(var(--paper) / .88);
+      font-size: .75rem;
+      line-height: 1rem;
+    }
+    .tool-chip img {
+      width: 20px;
+      height: 20px;
+      flex: 0 0 auto;
+      border-radius: 5px;
+      object-fit: contain;
+    }
+
+    .social-card-image {
+      aspect-ratio: 16 / 9;
+      width: 100%;
+      object-fit: cover;
+      transition: transform 650ms cubic-bezier(.2,.7,.2,1);
+    }
+    .social-card:hover .social-card-image { transform: scale(1.035); }
+
+    .marquee-track { animation: marquee 34s linear infinite; }
+    .marquee:hover .marquee-track { animation-play-state: paused; }
+
+    .portrait-card img { transition: transform 900ms cubic-bezier(.2,.7,.2,1), filter 700ms ease; }
+    .portrait-card:hover img { transform: scale(1.035); filter: saturate(1.08); }
+    body, main > section, footer, #theme-toggle {
+      transition: background-color 250ms ease, color 250ms ease, border-color 250ms ease;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 750ms ease, transform 750ms cubic-bezier(.2,.7,.2,1);
+    }
+    .reveal.is-visible { opacity: 1; transform: translateY(0); }
+
+    .hero-enter { animation: hero-enter 950ms cubic-bezier(.2,.7,.2,1) both; }
+    .hero-enter-delay { animation: hero-enter 950ms 160ms cubic-bezier(.2,.7,.2,1) both; }
+    .hero-copy {
+      left: max(5%, calc((100% - 1500px) / 2 + 56px));
+      top: 30%;
+      width: min(46%, 620px);
+    }
+    .hero-title {
+      font-size: clamp(3.6rem, 6.2vw, 6.4rem);
+      line-height: .92;
+      letter-spacing: -.07em;
+    }
+    .hero-title .name-line { display: block; }
+    .hero-outline {
+      color: transparent;
+      -webkit-text-stroke: 1.5px rgb(var(--paper));
+      text-stroke: 1.5px rgb(var(--paper));
+    }
+
+    @keyframes hero-enter {
+      from { opacity: 0; transform: translateY(28px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+    @media (max-width: 639px) {
+      .hero-copy {
+        left: 6%;
+        top: 30%;
+        width: 49%;
+      }
+      .hero-title {
+        font-size: clamp(1.55rem, 7.1vw, 1.8rem);
+        line-height: .96;
+        letter-spacing: -.065em;
+      }
+      .hero-copy > p:first-child {
+        font-size: 8px;
+        letter-spacing: .12em;
+        white-space: nowrap;
+      }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+      }
+      .reveal { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+
+<body class="bg-ink text-paper antialiased">
+  <header id="top" class="relative isolate min-h-[640px] overflow-hidden md:min-h-[620px]">
+    <div class="absolute inset-0 -z-10 bg-ink"></div>
+    <div class="hero-portrait absolute bottom-0 right-[2%] z-0 flex h-[50%] w-[43%] items-end justify-center overflow-hidden rounded-t-[48%] md:right-[3%] md:h-[92%] md:w-[44%]">
+      <img class="h-full w-full object-cover object-top mix-blend-multiply" src="images/hanna1.png" alt="Hanna Faith Adap portrait" fetchpriority="high">
+    </div>
+
+    <div class="relative z-20 mx-auto flex w-full max-w-[1500px] items-start justify-between gap-4 px-6 pt-7 sm:px-10 md:px-14 md:pt-12">
+      <address class="space-y-2 not-italic text-[11px] font-medium leading-tight text-white/85 sm:text-xs">
+        <a class="flex items-center gap-2 transition hover:text-paper" href="tel:09067206088">
+          <span class="material-symbols-rounded text-[16px] text-paper">call</span>
+          <span>09067206088</span>
+        </a>
+        <a class="flex items-center gap-2 transition hover:text-paper" href="mailto:hannafaithadap02@gmail.com">
+          <span class="material-symbols-rounded text-[16px] text-paper">mail</span>
+          <span>hannafaithadap02@gmail.com</span>
+        </a>
+        <span class="hidden items-center gap-2 sm:flex">
+          <span class="material-symbols-rounded text-[16px] text-paper">location_on</span>
+          <span>General Trias, Cavite, Philippines</span>
+        </span>
+      </address>
+
+      <div class="flex shrink-0 items-start gap-3">
+        <a href="#top" class="group flex items-center gap-2 text-right" aria-label="Hanna Faith Adap, home">
+          <span class="font-display text-xs font-black leading-[.9] tracking-tight text-white sm:text-2xl">HANNA FAITH<br><span class="hidden text-[10px] font-bold tracking-[.45em] text-paper/80 sm:inline">CREATIVE STUDIO</span></span>
+          <span class="material-symbols-rounded hidden text-4xl text-paper transition-transform group-hover:translate-y-1 sm:inline">auto_awesome</span>
+        </a>
+        <button id="theme-toggle" type="button" class="inline-flex size-9 items-center justify-center rounded-full border border-paper/40 text-paper transition hover:bg-paper hover:text-ink sm:size-10" aria-label="Switch to dark mode" aria-pressed="false" title="Switch to dark mode">
+          <span id="theme-icon" class="material-symbols-rounded" aria-hidden="true">dark_mode</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="hero-copy absolute z-10 text-left">
+      <p class="mb-3 text-[9px] font-semibold uppercase tracking-[.18em] text-stone sm:mb-4 sm:text-[11px] sm:tracking-[.22em]">Creative &amp; Virtual Support</p>
+      <h1 class="hero-title hero-enter font-display font-extrabold uppercase text-paper">
+        <span class="name-line">Hanna Faith</span>
+        <span class="hero-outline name-line">Adap</span>
+      </h1>
+      <p class="hero-enter-delay mt-3 max-w-sm text-[11px] font-medium leading-relaxed text-white/85 sm:mt-5 sm:text-sm">
+        Thoughtful visuals, meaningful stories, and creative support for brands ready to grow.
+      </p>
+      <a href="#contact" class="mt-4 inline-flex min-h-9 items-center gap-2 rounded-full bg-paper px-4 text-[10px] font-bold text-ink transition hover:-translate-y-0.5 hover:bg-white sm:mt-6 sm:min-h-11 sm:px-5 sm:text-xs">
+        Let’s talk <span class="material-symbols-rounded text-sm">arrow_forward</span>
+      </a>
+    </div>
+  </header>
+
+  <div class="marquee relative z-20 overflow-hidden border-y border-white/10 bg-ink py-4 sm:py-5" aria-label="Services">
+    <div class="marquee-track flex w-max items-center gap-7 whitespace-nowrap text-xs font-semibold uppercase tracking-[.13em] text-white/90 sm:gap-9 sm:text-sm">
+      <div class="flex items-center gap-7 sm:gap-9">
+        <span>Graphic Design</span><span class="text-paper/60">✳</span>
+        <span>Email Marketing</span><span class="text-paper/60">✳</span>
+        <span>Copywriting</span><span class="text-paper/60">✳</span>
+        <span>Customer Service</span><span class="text-paper/60">✳</span>
+        <span>Content Creation</span><span class="text-paper/60">✳</span>
+        <span>Social Media Management</span><span class="text-paper/60">✳</span>
+        <span>Video Editing</span><span class="text-paper/60">✳</span>
+        <span>Web Design</span><span class="text-paper/60">✳</span>
+        <span>Social Media Marketing</span><span class="text-paper/60">✳</span>
+        <span>Content Planning &amp; Scheduling</span><span class="text-paper/60">✳</span>
+        <span>Instrument &amp; Dance Trainer</span><span class="text-paper/60">✳</span>
+        <span>Pinterest Management</span><span class="text-paper/60">✳</span>
+      </div>
+      <div class="flex items-center gap-7 sm:gap-9" aria-hidden="true">
+        <span>Graphic Design</span><span class="text-paper/60">✳</span>
+        <span>Email Marketing</span><span class="text-paper/60">✳</span>
+        <span>Copywriting</span><span class="text-paper/60">✳</span>
+        <span>Customer Service</span><span class="text-paper/60">✳</span>
+        <span>Content Creation</span><span class="text-paper/60">✳</span>
+        <span>Social Media Management</span><span class="text-paper/60">✳</span>
+        <span>Video Editing</span><span class="text-paper/60">✳</span>
+        <span>Web Design</span><span class="text-paper/60">✳</span>
+        <span>Social Media Marketing</span><span class="text-paper/60">✳</span>
+        <span>Content Planning &amp; Scheduling</span><span class="text-paper/60">✳</span>
+        <span>Instrument &amp; Dance Trainer</span><span class="text-paper/60">✳</span>
+        <span>Pinterest Management</span><span class="text-paper/60">✳</span>
+      </div>
+    </div>
+  </div>
+
+  <main>
+    <section id="about" class="relative overflow-hidden bg-warm-white px-5 py-16 text-foreground sm:px-8 sm:py-24 lg:px-12">
+      <div class="pointer-events-none absolute inset-0 opacity-[.08]" style="background-image: radial-gradient(rgb(var(--stone)) .7px, transparent .7px); background-size: 13px 13px;"></div>
+      <div class="relative mx-auto grid max-w-6xl gap-10 lg:grid-cols-[1.05fr_.95fr] lg:items-center lg:gap-16">
+        <div class="reveal">
+          <div class="portrait-card relative overflow-hidden bg-warm-white shadow-[0_24px_70px_rgba(23,23,21,.14)]">
+            <img class="aspect-[.82] w-full bg-warm-white object-contain object-bottom" src="images/hanna.png" alt="Hanna Faith Adap standing in her studio portrait" loading="lazy">
+            <span class="absolute bottom-4 left-4 rounded-full bg-ink/75 px-4 py-2 text-[10px] font-semibold uppercase tracking-[.18em] text-paper backdrop-blur-md">A little about me</span>
+          </div>
+          <div class="relative mt-5 flex min-h-32 items-center gap-5 sm:mt-7">
+            <div class="shrink-0">
+              <p class="font-display text-6xl font-black uppercase leading-[.82] tracking-tight text-stone sm:text-7xl">Intro</p>
+              <p class="-mt-1 ml-2 -rotate-6 font-script text-4xl italic text-foreground sm:text-5xl">About Me</p>
+            </div>
+            <span class="h-px flex-1 bg-stone/70"></span>
+            <span class="material-symbols-rounded hidden text-3xl text-stone sm:block">auto_awesome</span>
+          </div>
+        </div>
+
+        <div class="reveal space-y-5 text-[14px] leading-7 text-foreground/80 sm:text-[15px] sm:leading-8" style="transition-delay: 120ms">
+          <p>Since 2021, I have been a dedicated <strong class="font-bold text-foreground">freelancer and virtual professional</strong>, helping businesses and creators grow their online presence through social media management, graphic design, content creation, and administrative support.</p>
+          <p>I’ve had the privilege of collaborating with talented creators and businesses across the Philippines, the United States, and Australia. Every project is a chance to bring a thoughtful mix of creativity, strategy, and care to the people behind a brand.</p>
+          <p>Beyond digital services, I’m passionate about event planning and photography. If you’re looking for a creative partner who can turn ideas into polished, purposeful work, <a href="mailto:hannafaithadap02@gmail.com" class="font-bold text-foreground underline decoration-stone/60 underline-offset-4 transition hover:decoration-ink">let’s connect.</a></p>
+          <div class="flex flex-wrap gap-2 pt-1">
+            <span class="rounded-full border border-ink/15 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[.12em]">Creative</span>
+            <span class="rounded-full border border-ink/15 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[.12em]">Strategic</span>
+            <span class="rounded-full border border-ink/15 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[.12em]">Detail-minded</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="services" class="bg-ink px-5 py-16 sm:px-8 sm:py-24 lg:px-12">
+      <div class="mx-auto max-w-6xl">
+        <div class="reveal mb-9 max-w-2xl">
+          <p class="mb-3 text-xs font-semibold uppercase tracking-[.25em] text-paper/70">Ways I can help</p>
+          <h2 class="font-display text-5xl font-black uppercase leading-none tracking-tight text-paper sm:text-6xl">My Services</h2>
+          <p class="mt-4 text-sm leading-7 text-white/70">Creative and virtual support tailored to help your brand connect, grow, and stay organized.</p>
+        </div>
+        <div class="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-4">
+          <article class="reveal group rounded-2xl border border-paper/15 bg-paper/5 p-4 transition duration-300 hover:-translate-y-1 hover:border-stone/70 hover:bg-paper/10 sm:p-5">
+            <span class="material-symbols-rounded mb-4 inline-flex size-10 items-center justify-center rounded-xl bg-paper/10 text-paper">palette</span>
+            <h3 class="text-sm font-semibold text-paper">Graphic Design</h3>
+          </article>
+          <article class="reveal group rounded-2xl border border-paper/15 bg-paper/5 p-4 transition duration-300 hover:-translate-y-1 hover:border-stone/70 hover:bg-paper/10 sm:p-5" style="transition-delay: 40ms">
+            <span class="material-symbols-rounded mb-4 inline-flex size-10 items-center justify-center rounded-xl bg-paper/10 text-paper">forward_to_inbox</span>
+            <h3 class="text-sm font-semibold text-paper">Email Marketing</h3>
+          </article>
+          <article class="reveal group rounded-2xl border border-paper/15 bg-paper/5 p-4 transition duration-300 hover:-translate-y-1 hover:border-stone/70 hover:bg-paper/10 sm:p-5" style="transition-delay: 80ms">
+            <span class="material-symbols-rounded mb-4 inline-flex size-10 items-center justify-center rounded-xl bg-paper/10 text-paper">edit_note</span>
+            <h3 class="text-sm font-semibold text-paper">Copywriting</h3>
+          </article>
+          <article class="reveal group rounded-2xl border border-paper/15 bg-paper/5 p-4 transition duration-300 hover:-translate-y-1 hover:border-stone/70 hover:bg-paper/10 sm:p-5" style="transition-delay: 120ms">
+            <span class="material-symbols-rounded mb-4 inline-flex size-10 items-center justify-center rounded-xl bg-paper/10 text-paper">support_agent</span>
+            <h3 class="text-sm font-semibold text-paper">Customer Service</h3>
+          </article>
+          <article class="reveal group rounded-2xl border border-paper/15 bg-paper/5 p-4 transition duration-300 hover:-translate-y-1 hover:border-stone/70 hover:bg-paper/10 sm:p-5">
+            <span class="material-symbols-rounded mb-4 inline-flex size-10 items-center justify-center rounded-xl bg-paper/10 text-paper">auto_awesome</span>
+            <h3 class="text-sm font-semibold text-paper">Content Creation</h3>
+          </article>
+          <article class="reveal group rounded-2xl border border-paper/15 bg-paper/5 p-4 transition duration-300 hover:-translate-y-1 hover:border-stone/70 hover:bg-paper/10 sm:p-5" style="transition-delay: 40ms">
+            <span class="material-symbols-rounded mb-4 inline-flex size-10 items-center justify-center rounded-xl bg-paper/10 text-paper">groups_2</span>
+            <h3 class="text-sm font-semibold text-paper">Social Media Management</h3>
+          </article>
+          <article class="reveal group rounded-2xl border border-paper/15 bg-paper/5 p-4 transition duration-300 hover:-translate-y-1 hover:border-stone/70 hover:bg-paper/10 sm:p-5" style="transition-delay: 80ms">
+            <span class="material-symbols-rounded mb-4 inline-flex size-10 items-center justify-center rounded-xl bg-paper/10 text-paper">movie_edit</span>
+            <h3 class="text-sm font-semibold text-paper">Video Editing</h3>
+          </article>
+          <article class="reveal group rounded-2xl border border-paper/15 bg-paper/5 p-4 transition duration-300 hover:-translate-y-1 hover:border-stone/70 hover:bg-paper/10 sm:p-5" style="transition-delay: 120ms">
+            <span class="material-symbols-rounded mb-4 inline-flex size-10 items-center justify-center rounded-xl bg-paper/10 text-paper">web</span>
+            <h3 class="text-sm font-semibold text-paper">Web Design</h3>
+          </article>
+          <article class="reveal group rounded-2xl border border-paper/15 bg-paper/5 p-4 transition duration-300 hover:-translate-y-1 hover:border-stone/70 hover:bg-paper/10 sm:p-5">
+            <span class="material-symbols-rounded mb-4 inline-flex size-10 items-center justify-center rounded-xl bg-paper/10 text-paper">campaign</span>
+            <h3 class="text-sm font-semibold text-paper">Social Media Marketing</h3>
+          </article>
+          <article class="reveal group rounded-2xl border border-paper/15 bg-paper/5 p-4 transition duration-300 hover:-translate-y-1 hover:border-stone/70 hover:bg-paper/10 sm:p-5" style="transition-delay: 40ms">
+            <span class="material-symbols-rounded mb-4 inline-flex size-10 items-center justify-center rounded-xl bg-paper/10 text-paper">calendar_month</span>
+            <h3 class="text-sm font-semibold text-paper">Content Planning &amp; Scheduling</h3>
+          </article>
+          <article class="reveal group rounded-2xl border border-paper/15 bg-paper/5 p-4 transition duration-300 hover:-translate-y-1 hover:border-stone/70 hover:bg-paper/10 sm:p-5" style="transition-delay: 80ms">
+            <span class="material-symbols-rounded mb-4 inline-flex size-10 items-center justify-center rounded-xl bg-paper/10 text-paper">piano</span>
+            <h3 class="text-sm font-semibold text-paper">Instrument &amp; Dance Trainer</h3>
+          </article>
+          <article class="reveal group rounded-2xl border border-paper/15 bg-paper/5 p-4 transition duration-300 hover:-translate-y-1 hover:border-stone/70 hover:bg-paper/10 sm:p-5" style="transition-delay: 120ms">
+            <span class="material-symbols-rounded mb-4 inline-flex size-10 items-center justify-center rounded-xl bg-paper/10 text-paper">push_pin</span>
+            <h3 class="text-sm font-semibold text-paper">Pinterest Management</h3>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="social-pages" class="bg-warm-white px-5 py-16 text-foreground sm:px-8 sm:py-24 lg:px-12">
+      <div class="mx-auto max-w-6xl">
+        <div class="reveal mb-9 max-w-2xl">
+          <p class="mb-3 text-xs font-semibold uppercase tracking-[.25em] text-stone">Selected client accounts</p>
+          <h2 class="font-display text-5xl font-black uppercase leading-none tracking-tight text-foreground sm:text-6xl">Social Media Pages</h2>
+          <p class="mt-4 text-sm leading-7 text-foreground/75 sm:text-base">A selection of social pages and campaigns I’ve supported across different industries.</p>
+        </div>
+        <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <a href="https://www.pinterest.ph/keeshaskitchen/" target="_blank" rel="noopener noreferrer" class="social-card reveal group overflow-hidden rounded-2xl border border-foreground/10 bg-ink/5 transition hover:-translate-y-1 hover:border-stone/60">
+            <div class="overflow-hidden"><img class="social-card-image" src="images/social/keesha.png" alt="Preview of Keesha’s Kitchen Pinterest page" loading="lazy"></div>
+            <div class="flex items-center gap-3 p-4"><img class="size-9 rounded-xl bg-white p-1.5 object-contain" src="images/tools/pinterest.png" alt="" loading="lazy"><span class="min-w-0 flex-1"><span class="block text-[10px] font-semibold uppercase tracking-[.15em] text-foreground/55">Pinterest</span><span class="mt-1 block font-semibold text-foreground">Keesha’s Kitchen</span></span><span class="material-symbols-rounded text-lg text-stone transition-transform group-hover:translate-x-1">north_east</span></div>
+          </a>
+          <a href="https://www.youtube.com/@gregandcherylclarke/videos" target="_blank" rel="noopener noreferrer" class="social-card reveal group overflow-hidden rounded-2xl border border-foreground/10 bg-ink/5 transition hover:-translate-y-1 hover:border-stone/60" style="transition-delay: 40ms">
+            <div class="overflow-hidden"><img class="social-card-image" src="images/social/greg-cheryl.png" alt="Preview of Greg and Cheryl Clarke’s YouTube videos" loading="lazy"></div>
+            <div class="flex items-center gap-3 p-4"><img class="size-9 rounded-xl bg-white p-1.5 object-contain" src="images/tools/youtube.png" alt="" loading="lazy"><span class="min-w-0 flex-1"><span class="block text-[10px] font-semibold uppercase tracking-[.15em] text-foreground/55">YouTube</span><span class="mt-1 block font-semibold text-foreground">Greg &amp; Cheryl Clarke</span></span><span class="material-symbols-rounded text-lg text-stone transition-transform group-hover:translate-x-1">north_east</span></div>
+          </a>
+          <a href="https://www.youtube.com/@HammerandHeelsRealtor" target="_blank" rel="noopener noreferrer" class="social-card reveal group overflow-hidden rounded-2xl border border-foreground/10 bg-ink/5 transition hover:-translate-y-1 hover:border-stone/60" style="transition-delay: 80ms">
+            <div class="overflow-hidden"><img class="social-card-image" src="images/social/hammer-heels.png" alt="Preview of Hammer and Heels Realtor’s YouTube channel" loading="lazy"></div>
+            <div class="flex items-center gap-3 p-4"><img class="size-9 rounded-xl bg-white p-1.5 object-contain" src="images/tools/youtube.png" alt="" loading="lazy"><span class="min-w-0 flex-1"><span class="block text-[10px] font-semibold uppercase tracking-[.15em] text-foreground/55">YouTube · Real Estate</span><span class="mt-1 block font-semibold text-foreground">Hammer &amp; Heels Realtor</span></span><span class="material-symbols-rounded text-lg text-stone transition-transform group-hover:translate-x-1">north_east</span></div>
+          </a>
+          <a href="https://www.youtube.com/@letstalkchildcare" target="_blank" rel="noopener noreferrer" class="social-card reveal group overflow-hidden rounded-2xl border border-foreground/10 bg-ink/5 transition hover:-translate-y-1 hover:border-stone/60">
+            <div class="overflow-hidden"><img class="social-card-image" src="images/social/childcare.png" alt="Preview of Let’s Talk Childcare’s YouTube channel" loading="lazy"></div>
+            <div class="flex items-center gap-3 p-4"><img class="size-9 rounded-xl bg-white p-1.5 object-contain" src="images/tools/youtube.png" alt="" loading="lazy"><span class="min-w-0 flex-1"><span class="block text-[10px] font-semibold uppercase tracking-[.15em] text-foreground/55">YouTube · Childcare</span><span class="mt-1 block font-semibold text-foreground">Let’s Talk Childcare</span></span><span class="material-symbols-rounded text-lg text-stone transition-transform group-hover:translate-x-1">north_east</span></div>
+          </a>
+          <a href="https://share.google/PpQKhLaWBsb6LcY6D" target="_blank" rel="noopener noreferrer" class="social-card reveal group overflow-hidden rounded-2xl border border-foreground/10 bg-ink/5 transition hover:-translate-y-1 hover:border-stone/60" style="transition-delay: 40ms">
+            <div class="overflow-hidden"><img class="social-card-image" src="images/social/business-profile.png" alt="Preview of the Google Business profile" loading="lazy"></div>
+            <div class="flex items-center gap-3 p-4"><img class="size-9 rounded-xl bg-white p-1.5 object-contain" src="images/tools/google-business.png" alt="" loading="lazy"><span class="min-w-0 flex-1"><span class="block text-[10px] font-semibold uppercase tracking-[.15em] text-foreground/55">Google Business</span><span class="mt-1 block font-semibold text-foreground">Business Profile</span></span><span class="material-symbols-rounded text-lg text-stone transition-transform group-hover:translate-x-1">north_east</span></div>
+          </a>
+          <a href="https://www.facebook.com/QualityBuiltHomes/" target="_blank" rel="noopener noreferrer" class="social-card reveal group overflow-hidden rounded-2xl border border-foreground/10 bg-ink/5 transition hover:-translate-y-1 hover:border-stone/60" style="transition-delay: 80ms">
+            <div class="overflow-hidden"><img class="social-card-image" src="images/social/quality-built-homes.png" alt="Preview of the Quality Built Homes Facebook page" loading="lazy"></div>
+            <div class="flex items-center gap-3 p-4"><img class="size-9 rounded-xl bg-white p-1.5 object-contain" src="images/tools/facebook.png" alt="" loading="lazy"><span class="min-w-0 flex-1"><span class="block text-[10px] font-semibold uppercase tracking-[.15em] text-foreground/55">Facebook · Homebuilding</span><span class="mt-1 block font-semibold text-foreground">Quality Built Homes</span></span><span class="material-symbols-rounded text-lg text-stone transition-transform group-hover:translate-x-1">north_east</span></div>
+          </a>
+          <a href="https://open.spotify.com/show/4Lg2s3aiUOy428cnsgR16i?si=fa4bf26fdc504327" target="_blank" rel="noopener noreferrer" class="social-card reveal group overflow-hidden rounded-2xl border border-foreground/10 bg-ink/5 transition hover:-translate-y-1 hover:border-stone/60">
+            <div class="overflow-hidden"><img class="social-card-image" src="images/social/spotify.png" alt="Preview of the Spotify podcast page" loading="lazy"></div>
+            <div class="flex items-center gap-3 p-4"><img class="size-9 rounded-xl bg-white p-1.5 object-contain" src="images/tools/spotify.png" alt="" loading="lazy"><span class="min-w-0 flex-1"><span class="block text-[10px] font-semibold uppercase tracking-[.15em] text-foreground/55">Spotify</span><span class="mt-1 block font-semibold text-foreground">Podcast Show</span></span><span class="material-symbols-rounded text-lg text-stone transition-transform group-hover:translate-x-1">north_east</span></div>
+          </a>
+          <a href="https://typoductions.com/social-media-strategy/" target="_blank" rel="noopener noreferrer" class="social-card reveal group overflow-hidden rounded-2xl border border-foreground/10 bg-ink/5 transition hover:-translate-y-1 hover:border-stone/60" style="transition-delay: 40ms">
+            <div class="overflow-hidden"><img class="social-card-image" src="images/social/typoductions.png" alt="Preview of Typoductions’ social media strategy page" loading="lazy"></div>
+            <div class="flex items-center gap-3 p-4"><img class="size-9 rounded-xl bg-white p-1.5 object-contain" src="images/tools/elementor.png" alt="" loading="lazy"><span class="min-w-0 flex-1"><span class="block text-[10px] font-semibold uppercase tracking-[.15em] text-foreground/55">Healthcare · 20+ accounts</span><span class="mt-1 block font-semibold text-foreground">Typoductions Social Strategy</span></span><span class="material-symbols-rounded text-lg text-stone transition-transform group-hover:translate-x-1">north_east</span></div>
+          </a>
+          <div class="social-card reveal overflow-hidden rounded-2xl border border-stone/50 bg-ink/5" style="transition-delay: 80ms">
+            <div class="relative flex aspect-[16/9] flex-col justify-end overflow-hidden bg-gradient-to-br from-[#f7d8c6] via-[#d49d88] to-[#805d53] p-5 text-[#2b201d]">
+              <span class="absolute -right-7 -top-14 size-44 rounded-full border border-white/40"></span>
+              <span class="absolute -right-1 -top-8 size-32 rounded-full border border-white/40"></span>
+              <span class="relative font-display text-2xl font-black uppercase tracking-tight">The Icing Agency</span>
+              <span class="relative mt-1 text-[9px] font-semibold uppercase tracking-[.24em]">Creative Marketing</span>
+            </div>
+            <div class="flex items-center gap-3 p-4"><img class="size-9 rounded-xl bg-white p-1.5 object-contain" src="images/tools/hootsuite.png" alt="" loading="lazy"><span class="min-w-0 flex-1"><span class="block text-[10px] font-semibold uppercase tracking-[.15em] text-foreground/55">Marketing Agency · Recent Client</span><span class="mt-1 block font-semibold text-foreground">The Icing Agency</span></span><span class="rounded-full bg-stone/15 px-2.5 py-1 text-[9px] font-bold uppercase tracking-wide text-foreground">Recent</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="tools" class="bg-ink px-5 py-16 sm:px-8 sm:py-24 lg:px-12">
+      <div class="mx-auto max-w-6xl">
+        <div class="reveal mb-9 max-w-2xl">
+          <p class="mb-3 text-xs font-semibold uppercase tracking-[.25em] text-paper/70">My workflow</p>
+          <h2 class="font-display text-5xl font-black uppercase leading-none tracking-tight text-paper sm:text-6xl">Tools I Use</h2>
+          <p class="mt-4 text-sm leading-7 text-white/70 sm:text-base">A flexible toolkit for organizing projects, creating content, and supporting clients.</p>
+        </div>
+        <div class="grid gap-4 sm:grid-cols-2">
+          <article class="reveal rounded-2xl border border-paper/15 bg-paper/5 p-5 sm:p-6">
+            <h3 class="mb-4 flex items-center gap-2 text-xs font-bold uppercase tracking-[.16em] text-stone"><span class="material-symbols-rounded text-lg">task_alt</span>Task Management</h3>
+            <div class="flex flex-wrap gap-2">
+              <span class="tool-chip"><img src="images/tools/airtable.png" alt="" loading="lazy">Airtable</span><span class="tool-chip"><img src="images/tools/activecollab.png" alt="" loading="lazy">ActiveCollab</span><span class="tool-chip"><img src="images/tools/clickup.png" alt="" loading="lazy">ClickUp</span><span class="tool-chip"><img src="images/tools/asana.png" alt="" loading="lazy">Asana</span><span class="tool-chip"><img src="images/tools/monday.png" alt="" loading="lazy">Monday.com</span><span class="tool-chip"><img src="images/tools/wrike.png" alt="" loading="lazy">Wrike</span><span class="tool-chip"><img src="images/tools/trello.png" alt="" loading="lazy">Trello</span><span class="tool-chip"><img src="images/tools/hive.png" alt="" loading="lazy">Hive</span>
+            </div>
+          </article>
+          <article class="reveal rounded-2xl border border-paper/15 bg-paper/5 p-5 sm:p-6" style="transition-delay: 40ms">
+            <h3 class="mb-4 flex items-center gap-2 text-xs font-bold uppercase tracking-[.16em] text-stone"><span class="material-symbols-rounded text-lg">cloud</span>Workspace &amp; Admin</h3>
+            <div class="flex flex-wrap gap-2">
+              <span class="tool-chip"><img src="images/tools/google-workspace.png" alt="" loading="lazy">Google Workspace</span><span class="tool-chip"><img src="images/tools/google.png" alt="" loading="lazy">G Suite</span><span class="tool-chip"><img src="images/tools/microsoft.png" alt="" loading="lazy">Microsoft 365</span><span class="tool-chip"><img src="images/tools/dropbox.png" alt="" loading="lazy">Dropbox</span><span class="tool-chip"><img src="images/tools/jotform.png" alt="" loading="lazy">Jotform</span>
+            </div>
+          </article>
+          <article class="reveal rounded-2xl border border-paper/15 bg-paper/5 p-5 sm:p-6">
+            <h3 class="mb-4 flex items-center gap-2 text-xs font-bold uppercase tracking-[.16em] text-stone"><span class="material-symbols-rounded text-lg">edit</span>Design &amp; Content</h3>
+            <div class="flex flex-wrap gap-2">
+              <span class="tool-chip"><img src="images/tools/canva.png" alt="" loading="lazy">Canva</span><span class="tool-chip"><img src="images/tools/adobe.png" alt="" loading="lazy">Photoshop</span><span class="tool-chip"><img src="images/tools/lightroom.png" alt="" loading="lazy">Lightroom</span><span class="tool-chip"><img src="images/tools/adobe.png" alt="" loading="lazy">Premiere Pro</span><span class="tool-chip"><img src="images/tools/capcut.png" alt="" loading="lazy">CapCut</span><span class="tool-chip"><img src="images/tools/filmora.png" alt="" loading="lazy">Filmora</span><span class="tool-chip"><img src="images/tools/chatgpt.png" alt="" loading="lazy">ChatGPT</span><span class="tool-chip"><img src="images/tools/claude.png" alt="" loading="lazy">Claude</span><span class="tool-chip"><img src="images/tools/flow-ai.png" alt="" loading="lazy">Flow AI</span>
+            </div>
+          </article>
+          <article class="reveal rounded-2xl border border-paper/15 bg-paper/5 p-5 sm:p-6" style="transition-delay: 40ms">
+            <h3 class="mb-4 flex items-center gap-2 text-xs font-bold uppercase tracking-[.16em] text-stone"><span class="material-symbols-rounded text-lg">calendar_month</span>Social Scheduling</h3>
+            <div class="flex flex-wrap gap-2">
+              <span class="tool-chip"><img src="images/tools/meta.png" alt="" loading="lazy">Meta Business Suite</span><span class="tool-chip"><img src="images/tools/hootsuite.png" alt="" loading="lazy">Hootsuite</span><span class="tool-chip"><img src="images/tools/later.png" alt="" loading="lazy">Later</span><span class="tool-chip"><img src="images/tools/reviewtrackers.png" alt="" loading="lazy">ReviewTrackers</span><span class="tool-chip"><img src="images/tools/planoly.png" alt="" loading="lazy">Planoly</span><span class="tool-chip"><img src="images/tools/tailwind.png" alt="" loading="lazy">Tailwind</span>
+            </div>
+          </article>
+          <article class="reveal rounded-2xl border border-paper/15 bg-paper/5 p-5 sm:p-6">
+            <h3 class="mb-4 flex items-center gap-2 text-xs font-bold uppercase tracking-[.16em] text-stone"><span class="material-symbols-rounded text-lg">headset_mic</span>Communication &amp; Time</h3>
+            <div class="flex flex-wrap gap-2">
+              <span class="tool-chip"><img src="images/tools/zoom.png" alt="" loading="lazy">Zoom</span><span class="tool-chip"><img src="images/tools/skype.png" alt="" loading="lazy">Skype</span><span class="tool-chip"><img src="images/tools/whatsapp.png" alt="" loading="lazy">WhatsApp</span><span class="tool-chip"><img src="images/tools/8x8.png" alt="" loading="lazy">8x8</span><span class="tool-chip"><img src="images/tools/slack.png" alt="" loading="lazy">Slack</span><span class="tool-chip"><img src="images/tools/timeclock.png" alt="" loading="lazy">TimeClock</span><span class="tool-chip"><img src="images/tools/clockify.png" alt="" loading="lazy">Clockify</span><span class="tool-chip"><img src="images/tools/desktime.png" alt="" loading="lazy">DeskTime</span>
+            </div>
+          </article>
+          <article class="reveal rounded-2xl border border-paper/15 bg-paper/5 p-5 sm:p-6" style="transition-delay: 40ms">
+            <h3 class="mb-4 flex items-center gap-2 text-xs font-bold uppercase tracking-[.16em] text-stone"><span class="material-symbols-rounded text-lg">business_center</span>CRM &amp; Other</h3>
+            <div class="flex flex-wrap gap-2">
+              <span class="tool-chip"><img src="images/tools/ringcentral.png" alt="" loading="lazy">RingCentral</span><span class="tool-chip"><img src="images/tools/mailchimp.png" alt="" loading="lazy">Mailchimp</span><span class="tool-chip"><img src="images/tools/kw.png" alt="" loading="lazy">KW Command</span><span class="tool-chip"><img src="images/tools/elevenlabs.png" alt="" loading="lazy">ElevenLabs</span><span class="tool-chip"><img src="images/tools/elementor.png" alt="" loading="lazy">Elementor</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="work" class="overflow-hidden bg-ink px-5 py-16 sm:px-8 sm:py-24 lg:px-12">
+      <div class="mx-auto max-w-6xl">
+        <div class="grid gap-8 lg:grid-cols-[.95fr_1.05fr] lg:items-center lg:gap-12">
+          <div class="reveal">
+            <p class="mb-5 text-xs font-semibold uppercase tracking-[.28em] text-paper/75">A collection of my work</p>
+            <h2 class="font-display text-[clamp(4.5rem,10vw,8.5rem)] font-black uppercase leading-[.78] tracking-[-.055em] text-paper">
+              Portfolio<br><span class="text-white">&amp; Resume</span>
+            </h2>
+          </div>
+          <div class="portrait-card reveal relative overflow-hidden bg-stone" style="transition-delay: 120ms">
+            <img class="aspect-[1.8] w-full object-cover object-center grayscale" src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&amp;fit=crop&amp;w=1400&amp;q=85" alt="Creative workspace with a laptop and notebook" loading="lazy">
+            <div class="absolute inset-0 bg-gradient-to-r from-ink/45 to-transparent"></div>
+            <p class="absolute bottom-5 left-5 text-xs font-semibold uppercase tracking-[.2em] text-white sm:bottom-7 sm:left-7">Ideas, made tangible.</p>
+          </div>
+        </div>
+
+        <div class="reveal mt-10 grid gap-8 border-t border-white/15 pt-8 lg:grid-cols-[1.15fr_.85fr] lg:items-center" style="transition-delay: 180ms">
+          <p class="max-w-2xl text-sm leading-7 text-white/70 sm:text-base sm:leading-8">
+            Bringing creativity and strategy together, I craft digital experiences that captivate audiences and elevate brands. Explore my portfolio, creative projects, and resume—let’s create something meaningful.
+          </p>
+          <div class="grid grid-cols-2 gap-3 sm:gap-4">
+            <a href="mailto:hannafaithadap02@gmail.com?subject=Cover%20letter%20request" class="group inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-paper/80 px-4 text-center text-xs font-semibold text-paper transition duration-300 hover:-translate-y-1 hover:bg-paper hover:text-ink sm:text-sm">
+              <span class="material-symbols-rounded text-lg">draft</span>Cover Letter
+            </a>
+            <a href="mailto:hannafaithadap02@gmail.com?subject=Work%20portfolio%20request" class="group inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-paper/80 px-4 text-center text-xs font-semibold text-paper transition duration-300 hover:-translate-y-1 hover:bg-paper hover:text-ink sm:text-sm">
+              <span class="material-symbols-rounded text-lg">work</span>Work Portfolio
+            </a>
+            <a href="mailto:hannafaithadap02@gmail.com?subject=Graphic%20resume%20request" class="group inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-paper px-4 text-center text-xs font-semibold text-ink shadow-lg shadow-black/10 transition duration-300 hover:-translate-y-1 hover:bg-white sm:text-sm">
+              <span class="material-symbols-rounded text-lg">description</span>Graphic Resume
+            </a>
+            <a href="mailto:hannafaithadap02@gmail.com?subject=Creative%20portfolio%20request" class="group inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-paper px-4 text-center text-xs font-semibold text-ink shadow-lg shadow-black/10 transition duration-300 hover:-translate-y-1 hover:bg-white sm:text-sm">
+              <span class="material-symbols-rounded text-lg">palette</span>Creative Portfolio
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="bg-warm-white px-5 py-16 text-foreground sm:px-8 sm:py-24 lg:px-12">
+      <div class="mx-auto max-w-6xl">
+        <div class="reveal mb-10 max-w-3xl">
+          <p class="mb-3 text-xs font-semibold uppercase tracking-[.25em] text-stone">Get in touch</p>
+          <h2 class="font-display text-5xl font-black uppercase leading-[.9] tracking-tight text-foreground sm:text-7xl">Start Your Project</h2>
+          <p class="mt-5 max-w-2xl text-sm leading-7 text-foreground/75 sm:text-base">
+            Need help with social media management, data entry, or bookkeeping? Let’s talk about how I can support your business.
+          </p>
+        </div>
+
+        <div class="grid gap-8 lg:grid-cols-[.9fr_1.1fr] lg:gap-14">
+          <div class="reveal space-y-7">
+            <div>
+              <h3 class="font-display text-2xl font-bold uppercase tracking-wide text-foreground">How I Can Help</h3>
+              <p class="mt-3 text-sm leading-7 text-foreground/75">
+                I manage social media accounts and provide reliable data entry and bookkeeping support. I can help keep your online presence active and your business records organized, so you can focus on what you do best.
+              </p>
+            </div>
+
+            <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-1">
+              <a href="mailto:hannafaithadap02@gmail.com" class="group flex items-center gap-4 rounded-2xl border border-foreground/10 bg-ink/5 p-4 transition hover:-translate-y-0.5 hover:border-stone/60">
+                <span class="material-symbols-rounded inline-flex size-11 shrink-0 items-center justify-center rounded-full bg-ink text-paper">mail</span>
+                <span>
+                  <span class="block text-[10px] font-semibold uppercase tracking-[.18em] text-foreground/55">Email</span>
+                  <span class="mt-1 block break-all text-sm font-semibold text-foreground">hannafaithadap02@gmail.com</span>
+                </span>
+                <span class="material-symbols-rounded ml-auto text-lg text-stone transition-transform group-hover:translate-x-1">north_east</span>
+              </a>
+              <div class="flex items-center gap-4 rounded-2xl border border-foreground/10 bg-ink/5 p-4">
+                <span class="material-symbols-rounded inline-flex size-11 shrink-0 items-center justify-center rounded-full bg-ink text-paper">location_on</span>
+                <span>
+                  <span class="block text-[10px] font-semibold uppercase tracking-[.18em] text-foreground/55">Location</span>
+                  <span class="mt-1 block text-sm font-semibold text-foreground">General Trias, Cavite, Philippines</span>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <form id="contact-form" action="https://formspree.io/f/mbgojqop" method="POST" class="reveal rounded-3xl bg-ink p-5 text-paper shadow-[0_24px_70px_rgba(23,23,21,.14)] sm:p-8" style="transition-delay: 120ms">
+            <h3 class="font-display text-2xl font-bold uppercase tracking-wide text-paper">Send a Message</h3>
+            <p class="mt-2 text-xs leading-6 text-paper/65">Fill in the details below and send your message directly.</p>
+
+            <div class="mt-6 space-y-4">
+              <input type="hidden" name="_subject" value="New project inquiry from Hanna Faith Adap">
+              <div>
+                <label for="contact-name" class="mb-2 block text-xs font-semibold text-paper/85">Name</label>
+                <input id="contact-name" name="name" type="text" autocomplete="name" required class="min-h-12 w-full rounded-xl border border-paper/20 bg-paper/5 px-4 text-sm text-paper outline-none transition placeholder:text-paper/35 focus:border-stone focus:ring-2 focus:ring-stone/30">
+              </div>
+              <div>
+                <label for="contact-email" class="mb-2 block text-xs font-semibold text-paper/85">Email</label>
+                <input id="contact-email" name="email" type="email" autocomplete="email" required class="min-h-12 w-full rounded-xl border border-paper/20 bg-paper/5 px-4 text-sm text-paper outline-none transition placeholder:text-paper/35 focus:border-stone focus:ring-2 focus:ring-stone/30">
+              </div>
+              <div>
+                <label for="contact-message" class="mb-2 block text-xs font-semibold text-paper/85">Message</label>
+                <textarea id="contact-message" name="message" rows="5" required class="w-full resize-y rounded-xl border border-paper/20 bg-paper/5 px-4 py-3 text-sm text-paper outline-none transition placeholder:text-paper/35 focus:border-stone focus:ring-2 focus:ring-stone/30"></textarea>
+              </div>
+              <button type="submit" class="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full bg-paper px-5 text-sm font-bold text-ink transition hover:-translate-y-0.5 hover:bg-white sm:w-auto">
+                <span id="contact-submit-label">Send Message</span>
+                <span class="material-symbols-rounded text-lg" aria-hidden="true">send</span>
+              </button>
+              <p id="contact-status" class="hidden text-sm" role="status" aria-live="polite"></p>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-white/10 bg-ink px-6 py-7 text-paper/70 sm:px-10">
+    <div class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 text-center sm:flex-row sm:text-left">
+      <a href="#top" class="font-display text-lg font-bold uppercase tracking-wide text-paper">Hanna Faith Adap</a>
+      <p class="text-[11px]">Creative work, with intention. <span aria-hidden="true">©</span> <span id="year"></span> Hanna Faith Adap</p>
+      <a href="#contact" class="inline-flex items-center gap-1 text-xs transition hover:text-white">
+        Get in touch <span class="material-symbols-rounded text-base">north_east</span>
+      </a>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script>
+    const themeToggle = document.getElementById("theme-toggle");
+    const themeIcon = document.getElementById("theme-icon");
+    const themeMeta = document.querySelector('meta[name="theme-color"]');
+
+    function setTheme(theme) {
+      const isDark = theme === "dark";
+      document.documentElement.dataset.theme = theme;
+      themeToggle.setAttribute("aria-pressed", String(isDark));
+      themeToggle.setAttribute("aria-label", isDark ? "Switch to light mode" : "Switch to dark mode");
+      themeToggle.title = isDark ? "Switch to light mode" : "Switch to dark mode";
+      themeIcon.textContent = isDark ? "light_mode" : "dark_mode";
+      themeMeta.content = isDark ? "#161916" : "#163B31";
+    }
+
+    const savedTheme = localStorage.getItem("hanna-portfolio-theme");
+    setTheme(savedTheme || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"));
+
+    themeToggle.addEventListener("click", () => {
+      const nextTheme = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+      localStorage.setItem("hanna-portfolio-theme", nextTheme);
+      setTheme(nextTheme);
+    });
+
+    const contactForm = document.getElementById("contact-form");
+    const contactStatus = document.getElementById("contact-status");
+    const contactSubmitButton = contactForm.querySelector('button[type="submit"]');
+    const contactSubmitLabel = document.getElementById("contact-submit-label");
+    const contactSubmitIcon = contactSubmitButton.querySelector(".material-symbols-rounded");
+
+    function showContactAlert(options) {
+      if (window.Swal) {
+        const warmWhite = getComputedStyle(document.documentElement).getPropertyValue("--warm-white").trim();
+        const isDark = document.documentElement.dataset.theme === "dark";
+        return Swal.fire({
+          ...options,
+          background: `rgb(${warmWhite})`,
+          color: isDark ? "#ebebe1" : "#163b31",
+          confirmButtonColor: "#b18963"
+        });
+      }
+
+      return Promise.resolve();
+    }
+
+    contactForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const formData = new FormData(contactForm);
+      const name = formData.get("name").toString().trim();
+      formData.set("_subject", `Project inquiry from ${name}`);
+
+      contactStatus.classList.add("hidden");
+      showContactAlert({
+        title: "Sending your message...",
+        allowOutsideClick: false,
+        allowEscapeKey: false,
+        didOpen: () => Swal.showLoading()
+      });
+      contactSubmitButton.disabled = true;
+      contactSubmitButton.setAttribute("aria-busy", "true");
+      contactSubmitLabel.textContent = "Sending...";
+      contactSubmitIcon.textContent = "hourglass_top";
+
+      try {
+        const response = await fetch(contactForm.action, {
+          method: "POST",
+          body: formData,
+          headers: { Accept: "application/json" }
+        });
+
+        if (response.ok) {
+          contactStatus.textContent = "Thank you! Your message has been sent successfully.";
+          contactStatus.className = "text-sm text-green-200";
+          contactForm.reset();
+          await showContactAlert({
+            icon: "success",
+            title: "Message sent!",
+            text: "Thank you for reaching out. Hanna will get back to you soon.",
+            confirmButtonText: "Done"
+          });
+        } else {
+          contactStatus.textContent = "Your message could not be sent. Please try again in a moment.";
+          contactStatus.className = "text-sm text-red-200";
+          await showContactAlert({
+            icon: "error",
+            title: "Message not sent",
+            text: "Please try again in a moment.",
+            confirmButtonText: "Try again"
+          });
+        }
+      } catch (error) {
+        contactStatus.textContent = "Unable to connect right now. Please check your internet connection and try again.";
+        contactStatus.className = "text-sm text-red-200";
+        if (window.Swal) {
+          Swal.close();
+        }
+        await showContactAlert({
+          icon: "error",
+          title: "Connection error",
+          text: "Unable to connect right now. Please check your internet connection and try again.",
+          confirmButtonText: "Try again"
+        });
+      } finally {
+        contactSubmitButton.disabled = false;
+        contactSubmitButton.removeAttribute("aria-busy");
+        contactSubmitLabel.textContent = "Send Message";
+        contactSubmitIcon.textContent = "send";
+        contactStatus.classList.remove("hidden");
+      }
+    });
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll(".reveal").forEach((element) => revealObserver.observe(element));
+  </script>
+</body>
+</html>
