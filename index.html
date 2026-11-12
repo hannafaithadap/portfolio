@@ -87,6 +87,88 @@
     }
     .social-card:hover .social-card-image { transform: scale(1.035); }
 
+    #services .service-grid { counter-reset: service; }
+    #services .service-grid > article {
+      position: relative;
+      display: flex;
+      min-height: 180px;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
+      border: 1px solid rgb(var(--paper) / .16);
+      border-radius: 1.25rem;
+      padding: 1.1rem;
+      counter-increment: service;
+      transition: transform 300ms ease, border-color 300ms ease, background 300ms ease;
+    }
+    #services .service-grid > article > img {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: .58;
+      filter: saturate(.72);
+      transition: transform 700ms cubic-bezier(.2,.7,.2,1), opacity 400ms ease, filter 400ms ease;
+    }
+    #services .service-grid > article::before {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background: linear-gradient(180deg, rgb(10 13 11 / .1) 0%, rgb(10 13 11 / .18) 30%, rgb(10 13 11 / .88) 100%);
+      content: "";
+      pointer-events: none;
+    }
+    #services .service-grid > article::after {
+      position: absolute;
+      z-index: 2;
+      top: 1.15rem;
+      right: 1.15rem;
+      color: rgb(255 255 255 / .82);
+      content: counter(service, decimal-leading-zero);
+      font-size: .65rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+    }
+    #services .service-grid > article:hover {
+      transform: translateY(-5px);
+      border-color: rgb(var(--stone) / .9);
+    }
+    #services .service-grid > article:hover > img { transform: scale(1.08); opacity: .78; filter: saturate(.95); }
+    #services .service-grid > article > span {
+      z-index: 2;
+      display: inline-flex;
+      width: 2.75rem;
+      height: 2.75rem;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgb(255 255 255 / .42);
+      border-radius: .9rem;
+      background: rgb(15 18 16 / .36);
+      color: rgb(255 255 255);
+      font-size: 1.45rem;
+      backdrop-filter: blur(8px);
+      transition: transform 300ms ease, background 300ms ease;
+    }
+    #services .service-grid > article:hover > span { transform: rotate(-8deg) scale(1.06); background: rgb(15 18 16 / .58); }
+    #services .service-grid > article h3 {
+      z-index: 2;
+      max-width: 13rem;
+      margin-top: 1.35rem;
+      color: #fff;
+      text-shadow: 0 2px 16px rgb(0 0 0 / .45);
+      font-size: .92rem;
+      font-weight: 700;
+      line-height: 1.3;
+    }
+    #services .service-grid > article:first-child {
+      grid-column: span 2;
+      min-height: 220px;
+    }
+    #services .service-grid > article:first-child > span { width: 3.25rem; height: 3.25rem; font-size: 1.7rem; }
+    #services .service-grid > article:first-child h3 { max-width: 18rem; font-size: 1.35rem; }
+
     .marquee-track { animation: marquee 34s linear infinite; }
     .marquee:hover .marquee-track { animation-play-state: paused; }
 
@@ -105,13 +187,41 @@
 
     .hero-enter { animation: hero-enter 950ms cubic-bezier(.2,.7,.2,1) both; }
     .hero-enter-delay { animation: hero-enter 950ms 160ms cubic-bezier(.2,.7,.2,1) both; }
+    .hero-shell {
+      background:
+        radial-gradient(ellipse at 71% 67%, rgb(143 121 73 / .24), transparent 34%),
+        linear-gradient(110deg, #11120f 0%, #13140f 58%, #1a1912 100%);
+      color: #f3f0e9;
+    }
+    .hero-shell::after {
+      position: absolute;
+      z-index: 1;
+      right: -24%;
+      bottom: -106%;
+      width: 94%;
+      aspect-ratio: 1;
+      border: 1px solid rgb(240 236 225 / .16);
+      border-radius: 50%;
+      content: "";
+      pointer-events: none;
+    }
+    #top .hero-portrait {
+      border-radius: 0;
+      z-index: 2;
+      background: radial-gradient(ellipse at 52% 72%, rgb(191 166 112 / .2), transparent 56%);
+    }
+    .hero-portrait img {
+      object-fit: cover;
+      object-position: center 8%;
+      mix-blend-mode: normal;
+    }
     .hero-copy {
       left: max(5%, calc((100% - 1500px) / 2 + 56px));
-      top: 30%;
-      width: min(46%, 620px);
+      top: 29%;
+      width: min(49%, 720px);
     }
     .hero-title {
-      font-size: clamp(3.6rem, 6.2vw, 6.4rem);
+      font-size: clamp(3.8rem, 6.5vw, 7rem);
       line-height: .92;
       letter-spacing: -.07em;
     }
@@ -146,6 +256,20 @@
         letter-spacing: .12em;
         white-space: nowrap;
       }
+      #top .hero-portrait {
+        right: 0;
+        width: 56%;
+        height: 58%;
+      }
+      .hero-portrait img {
+        object-fit: cover;
+        object-position: center 8%;
+      }
+      .hero-shell::after {
+        right: -67%;
+        bottom: -57%;
+        width: 130%;
+      }
     }
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
@@ -160,9 +284,9 @@
 </head>
 
 <body class="bg-ink text-paper antialiased">
-  <header id="top" class="relative isolate min-h-[640px] overflow-hidden md:min-h-[620px]">
-    <div class="absolute inset-0 -z-10 bg-ink"></div>
-    <div class="hero-portrait absolute bottom-0 right-[2%] z-0 flex h-[50%] w-[43%] items-end justify-center overflow-hidden rounded-t-[48%] md:right-[3%] md:h-[92%] md:w-[44%]">
+  <header id="top" class="hero-shell relative isolate min-h-[640px] overflow-hidden md:min-h-[690px]">
+    <div class="absolute inset-0 -z-10"></div>
+    <div class="hero-portrait absolute bottom-0 right-0 z-0 flex h-[55%] w-[48%] items-end justify-center overflow-hidden md:right-[4%] md:h-[91%] md:w-[43%]">
       <img class="h-full w-full object-cover object-top mix-blend-multiply" src="images/hanna1.png" alt="Hanna Faith Adap portrait" fetchpriority="high">
     </div>
 
@@ -194,7 +318,7 @@
     </div>
 
     <div class="hero-copy absolute z-10 text-left">
-      <p class="mb-3 text-[9px] font-semibold uppercase tracking-[.18em] text-stone sm:mb-4 sm:text-[11px] sm:tracking-[.22em]">Creative &amp; Virtual Support</p>
+      <p class="mb-3 text-[9px] font-semibold uppercase tracking-[.18em] text-[#d3a94e] sm:mb-4 sm:text-[11px] sm:tracking-[.22em]">Creative &amp; Virtual Support</p>
       <h1 class="hero-title hero-enter font-display font-extrabold uppercase text-paper">
         <span class="name-line">Hanna Faith</span>
         <span class="hero-outline name-line">Adap</span>
@@ -208,7 +332,7 @@
     </div>
   </header>
 
-  <div class="marquee relative z-20 overflow-hidden border-y border-white/10 bg-ink py-4 sm:py-5" aria-label="Services">
+  <div class="marquee relative z-20 overflow-hidden border-y border-white/10 bg-[#11120f] py-4 sm:py-5" aria-label="Services">
     <div class="marquee-track flex w-max items-center gap-7 whitespace-nowrap text-xs font-semibold uppercase tracking-[.13em] text-white/90 sm:gap-9 sm:text-sm">
       <div class="flex items-center gap-7 sm:gap-9">
         <span>Graphic Design</span><span class="text-paper/60">✳</span>
@@ -280,52 +404,64 @@
           <h2 class="font-display text-5xl font-black uppercase leading-none tracking-tight text-paper sm:text-6xl">My Services</h2>
           <p class="mt-4 text-sm leading-7 text-white/70">Creative and virtual support tailored to help your brand connect, grow, and stay organized.</p>
         </div>
-        <div class="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-4">
-          <article class="reveal group rounded-2xl border border-paper/15 bg-paper/5 p-4 transition duration-300 hover:-translate-y-1 hover:border-stone/70 hover:bg-paper/10 sm:p-5">
+        <div class="service-grid grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-4">
+          <article class="reveal group">
+            <img src="images/services/graphic-design.jpg" alt="" aria-hidden="true" loading="lazy">
             <span class="material-symbols-rounded mb-4 inline-flex size-10 items-center justify-center rounded-xl bg-paper/10 text-paper">palette</span>
             <h3 class="text-sm font-semibold text-paper">Graphic Design</h3>
           </article>
-          <article class="reveal group rounded-2xl border border-paper/15 bg-paper/5 p-4 transition duration-300 hover:-translate-y-1 hover:border-stone/70 hover:bg-paper/10 sm:p-5" style="transition-delay: 40ms">
+          <article class="reveal group" style="transition-delay: 40ms">
+            <img src="images/services/email-marketing.jpg" alt="" aria-hidden="true" loading="lazy">
             <span class="material-symbols-rounded mb-4 inline-flex size-10 items-center justify-center rounded-xl bg-paper/10 text-paper">forward_to_inbox</span>
             <h3 class="text-sm font-semibold text-paper">Email Marketing</h3>
           </article>
-          <article class="reveal group rounded-2xl border border-paper/15 bg-paper/5 p-4 transition duration-300 hover:-translate-y-1 hover:border-stone/70 hover:bg-paper/10 sm:p-5" style="transition-delay: 80ms">
+          <article class="reveal group" style="transition-delay: 80ms">
+            <img src="images/services/copywriting.jpg" alt="" aria-hidden="true" loading="lazy">
             <span class="material-symbols-rounded mb-4 inline-flex size-10 items-center justify-center rounded-xl bg-paper/10 text-paper">edit_note</span>
             <h3 class="text-sm font-semibold text-paper">Copywriting</h3>
           </article>
-          <article class="reveal group rounded-2xl border border-paper/15 bg-paper/5 p-4 transition duration-300 hover:-translate-y-1 hover:border-stone/70 hover:bg-paper/10 sm:p-5" style="transition-delay: 120ms">
+          <article class="reveal group" style="transition-delay: 120ms">
+            <img src="images/services/customer-service.jpg" alt="" aria-hidden="true" loading="lazy">
             <span class="material-symbols-rounded mb-4 inline-flex size-10 items-center justify-center rounded-xl bg-paper/10 text-paper">support_agent</span>
             <h3 class="text-sm font-semibold text-paper">Customer Service</h3>
           </article>
-          <article class="reveal group rounded-2xl border border-paper/15 bg-paper/5 p-4 transition duration-300 hover:-translate-y-1 hover:border-stone/70 hover:bg-paper/10 sm:p-5">
+          <article class="reveal group">
+            <img src="images/services/content-creation.jpg" alt="" aria-hidden="true" loading="lazy">
             <span class="material-symbols-rounded mb-4 inline-flex size-10 items-center justify-center rounded-xl bg-paper/10 text-paper">auto_awesome</span>
             <h3 class="text-sm font-semibold text-paper">Content Creation</h3>
           </article>
-          <article class="reveal group rounded-2xl border border-paper/15 bg-paper/5 p-4 transition duration-300 hover:-translate-y-1 hover:border-stone/70 hover:bg-paper/10 sm:p-5" style="transition-delay: 40ms">
+          <article class="reveal group" style="transition-delay: 40ms">
+            <img src="images/services/social-management.jpg" alt="" aria-hidden="true" loading="lazy">
             <span class="material-symbols-rounded mb-4 inline-flex size-10 items-center justify-center rounded-xl bg-paper/10 text-paper">groups_2</span>
             <h3 class="text-sm font-semibold text-paper">Social Media Management</h3>
           </article>
-          <article class="reveal group rounded-2xl border border-paper/15 bg-paper/5 p-4 transition duration-300 hover:-translate-y-1 hover:border-stone/70 hover:bg-paper/10 sm:p-5" style="transition-delay: 80ms">
+          <article class="reveal group" style="transition-delay: 80ms">
+            <img src="images/services/video-editing.jpg" alt="" aria-hidden="true" loading="lazy">
             <span class="material-symbols-rounded mb-4 inline-flex size-10 items-center justify-center rounded-xl bg-paper/10 text-paper">movie_edit</span>
             <h3 class="text-sm font-semibold text-paper">Video Editing</h3>
           </article>
-          <article class="reveal group rounded-2xl border border-paper/15 bg-paper/5 p-4 transition duration-300 hover:-translate-y-1 hover:border-stone/70 hover:bg-paper/10 sm:p-5" style="transition-delay: 120ms">
+          <article class="reveal group" style="transition-delay: 120ms">
+            <img src="images/services/web-design.jpg" alt="" aria-hidden="true" loading="lazy">
             <span class="material-symbols-rounded mb-4 inline-flex size-10 items-center justify-center rounded-xl bg-paper/10 text-paper">web</span>
             <h3 class="text-sm font-semibold text-paper">Web Design</h3>
           </article>
-          <article class="reveal group rounded-2xl border border-paper/15 bg-paper/5 p-4 transition duration-300 hover:-translate-y-1 hover:border-stone/70 hover:bg-paper/10 sm:p-5">
+          <article class="reveal group">
+            <img src="images/services/social-marketing.jpg" alt="" aria-hidden="true" loading="lazy">
             <span class="material-symbols-rounded mb-4 inline-flex size-10 items-center justify-center rounded-xl bg-paper/10 text-paper">campaign</span>
             <h3 class="text-sm font-semibold text-paper">Social Media Marketing</h3>
           </article>
-          <article class="reveal group rounded-2xl border border-paper/15 bg-paper/5 p-4 transition duration-300 hover:-translate-y-1 hover:border-stone/70 hover:bg-paper/10 sm:p-5" style="transition-delay: 40ms">
+          <article class="reveal group" style="transition-delay: 40ms">
+            <img src="images/services/content-planning.jpg" alt="" aria-hidden="true" loading="lazy">
             <span class="material-symbols-rounded mb-4 inline-flex size-10 items-center justify-center rounded-xl bg-paper/10 text-paper">calendar_month</span>
             <h3 class="text-sm font-semibold text-paper">Content Planning &amp; Scheduling</h3>
           </article>
-          <article class="reveal group rounded-2xl border border-paper/15 bg-paper/5 p-4 transition duration-300 hover:-translate-y-1 hover:border-stone/70 hover:bg-paper/10 sm:p-5" style="transition-delay: 80ms">
+          <article class="reveal group" style="transition-delay: 80ms">
+            <img src="images/services/dance-training.jpg" alt="" aria-hidden="true" loading="lazy">
             <span class="material-symbols-rounded mb-4 inline-flex size-10 items-center justify-center rounded-xl bg-paper/10 text-paper">piano</span>
             <h3 class="text-sm font-semibold text-paper">Instrument &amp; Dance Trainer</h3>
           </article>
-          <article class="reveal group rounded-2xl border border-paper/15 bg-paper/5 p-4 transition duration-300 hover:-translate-y-1 hover:border-stone/70 hover:bg-paper/10 sm:p-5" style="transition-delay: 120ms">
+          <article class="reveal group" style="transition-delay: 120ms">
+            <img src="images/services/pinterest-management.jpg" alt="" aria-hidden="true" loading="lazy">
             <span class="material-symbols-rounded mb-4 inline-flex size-10 items-center justify-center rounded-xl bg-paper/10 text-paper">push_pin</span>
             <h3 class="text-sm font-semibold text-paper">Pinterest Management</h3>
           </article>
@@ -377,6 +513,10 @@
           </div>
         </div>
         <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <a href="https://typoductions.com/social-media-strategy/" target="_blank" rel="noopener noreferrer" class="social-card reveal group overflow-hidden rounded-2xl border border-foreground/10 bg-ink/5 transition hover:-translate-y-1 hover:border-stone/60">
+            <div class="overflow-hidden"><img class="social-card-image" src="images/social/typoductions.png" alt="Preview of Typoductions’ social media strategy page" loading="lazy"></div>
+            <div class="flex items-center gap-3 p-4"><img class="size-9 rounded-xl bg-white p-1.5 object-contain" src="images/tools/elementor.png" alt="" loading="lazy"><span class="min-w-0 flex-1"><span class="block text-[10px] font-semibold uppercase tracking-[.15em] text-foreground/55">Healthcare · 20+ accounts</span><span class="mt-1 block font-semibold text-foreground">Typoductions Social Strategy</span></span><span class="material-symbols-rounded text-lg text-stone transition-transform group-hover:translate-x-1">north_east</span></div>
+          </a>
           <a href="https://www.pinterest.ph/keeshaskitchen/" target="_blank" rel="noopener noreferrer" class="social-card reveal group overflow-hidden rounded-2xl border border-foreground/10 bg-ink/5 transition hover:-translate-y-1 hover:border-stone/60">
             <div class="overflow-hidden"><img class="social-card-image" src="images/social/keesha.png" alt="Preview of Keesha’s Kitchen Pinterest page" loading="lazy"></div>
             <div class="flex items-center gap-3 p-4"><img class="size-9 rounded-xl bg-white p-1.5 object-contain" src="images/tools/pinterest.png" alt="" loading="lazy"><span class="min-w-0 flex-1"><span class="block text-[10px] font-semibold uppercase tracking-[.15em] text-foreground/55">Pinterest</span><span class="mt-1 block font-semibold text-foreground">Keesha’s Kitchen</span></span><span class="material-symbols-rounded text-lg text-stone transition-transform group-hover:translate-x-1">north_east</span></div>
@@ -404,10 +544,6 @@
           <a href="https://open.spotify.com/show/4Lg2s3aiUOy428cnsgR16i?si=fa4bf26fdc504327" target="_blank" rel="noopener noreferrer" class="social-card reveal group overflow-hidden rounded-2xl border border-foreground/10 bg-ink/5 transition hover:-translate-y-1 hover:border-stone/60">
             <div class="overflow-hidden"><img class="social-card-image" src="images/social/spotify.png" alt="Preview of the Spotify podcast page" loading="lazy"></div>
             <div class="flex items-center gap-3 p-4"><img class="size-9 rounded-xl bg-white p-1.5 object-contain" src="images/tools/spotify.png" alt="" loading="lazy"><span class="min-w-0 flex-1"><span class="block text-[10px] font-semibold uppercase tracking-[.15em] text-foreground/55">Spotify</span><span class="mt-1 block font-semibold text-foreground">Podcast Show</span></span><span class="material-symbols-rounded text-lg text-stone transition-transform group-hover:translate-x-1">north_east</span></div>
-          </a>
-          <a href="https://typoductions.com/social-media-strategy/" target="_blank" rel="noopener noreferrer" class="social-card reveal group overflow-hidden rounded-2xl border border-foreground/10 bg-ink/5 transition hover:-translate-y-1 hover:border-stone/60" style="transition-delay: 40ms">
-            <div class="overflow-hidden"><img class="social-card-image" src="images/social/typoductions.png" alt="Preview of Typoductions’ social media strategy page" loading="lazy"></div>
-            <div class="flex items-center gap-3 p-4"><img class="size-9 rounded-xl bg-white p-1.5 object-contain" src="images/tools/elementor.png" alt="" loading="lazy"><span class="min-w-0 flex-1"><span class="block text-[10px] font-semibold uppercase tracking-[.15em] text-foreground/55">Healthcare · 20+ accounts</span><span class="mt-1 block font-semibold text-foreground">Typoductions Social Strategy</span></span><span class="material-symbols-rounded text-lg text-stone transition-transform group-hover:translate-x-1">north_east</span></div>
           </a>
         </div>
       </div>
@@ -465,9 +601,9 @@
       <div class="mx-auto max-w-6xl">
         <div class="grid gap-8 lg:grid-cols-[.95fr_1.05fr] lg:items-center lg:gap-12">
           <div class="reveal">
-            <p class="mb-5 text-xs font-semibold uppercase tracking-[.28em] text-paper/75">A collection of my work</p>
+            <p class="mb-5 text-xs font-semibold uppercase tracking-[.28em] text-paper/75">Get to know me</p>
             <h2 class="font-display text-[clamp(4.5rem,10vw,8.5rem)] font-black uppercase leading-[.78] tracking-[-.055em] text-paper">
-              Portfolio<br><span class="text-white">&amp; Resume</span>
+              COVER LETTER<br><span class="text-white">&amp; RESUME</span>
             </h2>
           </div>
           <div class="portrait-card reveal relative overflow-hidden bg-stone" style="transition-delay: 120ms">
@@ -479,14 +615,11 @@
 
         <div class="reveal mt-10 grid gap-8 border-t border-white/15 pt-8 lg:grid-cols-[1.15fr_.85fr] lg:items-center" style="transition-delay: 180ms">
           <p class="max-w-2xl text-sm leading-7 text-white/70 sm:text-base sm:leading-8">
-            Bringing creativity and strategy together, I craft digital experiences that captivate audiences and elevate brands. Explore my portfolio, creative projects, and resume—let’s create something meaningful.
+            Read my cover letter to learn more about my approach, or view my resume for an overview of my experience and skills.
           </p>
-          <div class="grid gap-3 sm:grid-cols-3 sm:gap-4">
+          <div class="grid gap-3 sm:grid-cols-2 sm:gap-4">
             <a href="mailto:hannafaithadap02@gmail.com?subject=Cover%20letter%20request" class="group inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-paper/80 px-4 text-center text-xs font-semibold text-paper transition duration-300 hover:-translate-y-1 hover:bg-paper hover:text-ink sm:text-sm">
               <span class="material-symbols-rounded text-lg">draft</span>Cover Letter
-            </a>
-            <a href="http://surl.li/gvusul" target="_blank" rel="noopener noreferrer" class="group inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-paper/80 px-4 text-center text-xs font-semibold text-paper transition duration-300 hover:-translate-y-1 hover:bg-paper hover:text-ink sm:text-sm">
-              <span class="material-symbols-rounded text-lg">work</span>Portfolio
             </a>
             <a href="https://docs.google.com/document/d/1k1zokh7WTB786Bfx8_4laASTi_VlnhgX2dyN5rgPHgY/edit?usp=sharing" target="_blank" rel="noopener noreferrer" class="group inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-paper px-4 text-center text-xs font-semibold text-ink shadow-lg shadow-black/10 transition duration-300 hover:-translate-y-1 hover:bg-white sm:text-sm">
               <span class="material-symbols-rounded text-lg">description</span>Resume
