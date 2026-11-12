@@ -188,11 +188,30 @@
     .hero-enter { animation: hero-enter 950ms cubic-bezier(.2,.7,.2,1) both; }
     .hero-enter-delay { animation: hero-enter 950ms 160ms cubic-bezier(.2,.7,.2,1) both; }
     .hero-shell {
+      --portrait-shift-x: 0px;
+      --portrait-shift-y: 0px;
+      position: relative;
       background:
         radial-gradient(ellipse at 71% 67%, rgb(143 121 73 / .24), transparent 34%),
         linear-gradient(110deg, #11120f 0%, #13140f 58%, #1a1912 100%);
       color: #f3f0e9;
     }
+    .site-cursor-glow {
+      position: fixed;
+      z-index: 40;
+      top: 0;
+      left: 0;
+      width: min(520px, 85vw);
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgb(255 224 160 / .2) 0%, rgb(201 161 89 / .12) 24%, rgb(201 161 89 / .045) 48%, transparent 72%);
+      transform: translate(-50%, -50%);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 350ms ease;
+      will-change: left, top, opacity;
+    }
+    body.pointer-active .site-cursor-glow { opacity: 1; }
     .hero-shell::after {
       position: absolute;
       z-index: 1;
@@ -209,6 +228,8 @@
       border-radius: 0;
       z-index: 2;
       background: radial-gradient(ellipse at 52% 72%, rgb(191 166 112 / .2), transparent 56%);
+      transition: transform 220ms ease-out;
+      transform: translate3d(var(--portrait-shift-x), var(--portrait-shift-y), 0);
     }
     .hero-portrait img {
       object-fit: cover;
@@ -284,6 +305,7 @@
 </head>
 
 <body class="bg-ink text-paper antialiased">
+  <div class="site-cursor-glow" aria-hidden="true"></div>
   <header id="top" class="hero-shell relative isolate min-h-[640px] overflow-hidden md:min-h-[690px]">
     <div class="absolute inset-0 -z-10"></div>
     <div class="hero-portrait absolute bottom-0 right-0 z-0 flex h-[55%] w-[48%] items-end justify-center overflow-hidden md:right-[4%] md:h-[91%] md:w-[43%]">
@@ -820,6 +842,41 @@
     });
 
     document.getElementById("year").textContent = new Date().getFullYear();
+
+    const hero = document.getElementById("top");
+    const cursorGlow = document.querySelector(".site-cursor-glow");
+    const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)");
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+    if (finePointer.matches && !reducedMotion.matches) {
+      window.addEventListener("pointermove", (event) => {
+        cursorGlow.style.left = `${event.clientX}px`;
+        cursorGlow.style.top = `${event.clientY}px`;
+        document.body.classList.add("pointer-active");
+
+        if (hero.contains(event.target)) {
+          const bounds = hero.getBoundingClientRect();
+          hero.style.setProperty("--portrait-shift-x", `${(event.clientX - bounds.left) / bounds.width * 10 - 5}px`);
+          hero.style.setProperty("--portrait-shift-y", `${(event.clientY - bounds.top) / bounds.height * 8 - 4}px`);
+        } else {
+          hero.style.setProperty("--portrait-shift-x", "0px");
+          hero.style.setProperty("--portrait-shift-y", "0px");
+        }
+      }, { passive: true });
+
+      window.addEventListener("pointerout", (event) => {
+        if (!event.relatedTarget) {
+          document.body.classList.remove("pointer-active");
+          hero.style.setProperty("--portrait-shift-x", "0px");
+          hero.style.setProperty("--portrait-shift-y", "0px");
+        }
+      });
+
+      hero.addEventListener("pointerleave", () => {
+        hero.style.setProperty("--portrait-shift-x", "0px");
+        hero.style.setProperty("--portrait-shift-y", "0px");
+      });
+    }
 
     const revealObserver = new IntersectionObserver((entries, observer) => {
       entries.forEach((entry) => {
