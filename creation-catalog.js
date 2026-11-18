@@ -1,5 +1,18 @@
 window.creationCategories = [
   {
+    id: "ai-contents",
+    label: "AI Contents",
+    icon: "movie",
+    items: [
+      { file: "other-creations/ai-contents/copy_05D23085-E3D7-4424-A528-A540DCF1543D.mov", title: "AI Content Video 01" },
+      { file: "other-creations/ai-contents/copy_0B8449AA-ADBE-483D-A8A4-6037577F19F0.mov", title: "AI Content Video 02" },
+      { file: "other-creations/ai-contents/Helicopter_removing_cloth_from_b\u2026_62a98c9d.mp4", title: "Helicopter Campaign — Cloth Reveal" },
+      { file: "other-creations/ai-contents/Helicopter_unrolling_banner_over\u2026_31cbf127_1080p.mp4", title: "Helicopter Campaign — Banner Reveal" },
+      { file: "other-creations/ai-contents/tickets are live.mp4", title: "Tickets Are Live Promo" },
+      { file: "other-creations/ai-contents/\uD83C\uDFE1\uD83D\uDCB0 $17,500 IN CLOSING HELP OR A RATE BUY-DOWN PLUS $10,000 TOWARD CLOSING! \uD83D\uDC40YES, you read tha.mp4", title: "Real Estate Closing Offer — AI Video" }
+    ]
+  },
+  {
     id: "youtube-thumbnails",
     label: "YouTube Thumbnails",
     icon: "smart_display",
@@ -110,17 +123,4 @@ window.creationCategories = [
       { file: "other-creations/blogs/STRESSKNOTNYC - Blog Content (FEB.).docx", title: "StressKnot NYC Blog — February" }
     ]
   },
-  {
-    id: "ai-contents",
-    label: "AI Content",
-    icon: "movie",
-    items: [
-      { file: "other-creations/ai-contents/copy_05D23085-E3D7-4424-A528-A540DCF1543D.mov", title: "AI Content Video 01" },
-      { file: "other-creations/ai-contents/copy_0B8449AA-ADBE-483D-A8A4-6037577F19F0.mov", title: "AI Content Video 02" },
-      { file: "other-creations/ai-contents/Helicopter_removing_cloth_from_b\u2026_62a98c9d.mp4", title: "Helicopter Campaign — Cloth Reveal" },
-      { file: "other-creations/ai-contents/Helicopter_unrolling_banner_over\u2026_31cbf127_1080p.mp4", title: "Helicopter Campaign — Banner Reveal" },
-      { file: "other-creations/ai-contents/tickets are live.mp4", title: "Tickets Are Live Promo" },
-      { file: "other-creations/ai-contents/\uD83C\uDFE1\uD83D\uDCB0 $17,500 IN CLOSING HELP OR A RATE BUY-DOWN PLUS $10,000 TOWARD CLOSING! \uD83D\uDC40YES, you read tha.mp4", title: "Real Estate Closing Offer — AI Video" }
-    ]
-  }
 ];
