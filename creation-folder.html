@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#163B31">
+  <meta name="description" content="Explore selected creative work by Hanna Faith Adap.">
+  <title>Creative Portfolio | Hanna Faith Adap</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Roboto+Condensed:wght@700;800;900&family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,400,0,0" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            ink: "rgb(var(--ink) / <alpha-value>)",
+            foreground: "rgb(var(--foreground) / <alpha-value>)",
+            paper: "rgb(var(--paper) / <alpha-value>)",
+            stone: "rgb(var(--stone) / <alpha-value>)",
+            "warm-white": "rgb(var(--warm-white) / <alpha-value>)"
+          },
+          fontFamily: {
+            sans: ["DM Sans", "sans-serif"],
+            display: ["DM Sans", "sans-serif"]
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: 22 59 49;
+      --foreground: 22 59 49;
+      --paper: 240 236 225;
+      --stone: 177 137 99;
+      --warm-white: 240 236 225;
+    }
+
+    :root[data-theme="dark"] {
+      color-scheme: dark;
+      --ink: 22 25 22;
+      --foreground: 235 235 225;
+      --paper: 235 235 225;
+      --stone: 201 161 117;
+      --warm-white: 34 39 35;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: rgb(var(--warm-white)); color: rgb(var(--foreground)); font-family: "DM Sans", sans-serif; transition: background-color 250ms ease, color 250ms ease; }
+    ::selection { color: rgb(var(--ink)); background: rgb(var(--paper)); }
+    header, footer, .folder-project-card, #folder-not-found { transition: background-color 250ms ease, color 250ms ease, border-color 250ms ease; }
+    .folder-project-image { transition: transform 650ms cubic-bezier(.2,.7,.2,1); }
+    .folder-project-card:hover .folder-project-image { transform: scale(1.035); }
+  </style>
+</head>
+
+<body class="bg-warm-white text-foreground antialiased">
+  <header class="border-b border-foreground/10 bg-warm-white px-5 py-5 sm:px-8 lg:px-12">
+    <div class="mx-auto flex max-w-6xl items-center justify-between gap-4">
+      <a href="index.html#top" class="font-display text-sm font-black uppercase leading-tight tracking-wide text-foreground sm:text-base">
+        Hanna Faith Adap <span class="block text-[8px] font-bold tracking-[.3em] text-foreground/55">Creative Studio</span>
+      </a>
+      <div class="flex items-center gap-2">
+        <a href="index.html#other-creations" class="inline-flex min-h-10 items-center gap-2 rounded-full border border-foreground/25 px-3 text-[10px] font-semibold text-foreground transition hover:border-ink hover:bg-ink hover:text-paper sm:px-4 sm:text-xs">
+          <span class="material-symbols-rounded text-base" aria-hidden="true">arrow_back</span> All Creations
+        </a>
+        <button id="theme-toggle" type="button" class="inline-flex size-10 items-center justify-center rounded-full border border-foreground/25 text-foreground transition hover:bg-ink hover:text-paper" aria-label="Switch to dark mode" aria-pressed="false" title="Switch to dark mode">
+          <span id="theme-icon" class="material-symbols-rounded" aria-hidden="true">dark_mode</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="px-5 py-10 sm:px-8 sm:py-14 lg:px-12">
+    <div id="folder-not-found" class="mx-auto hidden max-w-3xl rounded-3xl border border-foreground/10 bg-ink/5 p-8 text-center sm:p-12" role="alert">
+      <span class="material-symbols-rounded text-5xl text-stone" aria-hidden="true">folder_off</span>
+      <h1 class="mt-4 font-display text-3xl font-black uppercase text-foreground">Folder not found</h1>
+      <p class="mt-3 text-sm leading-7 text-foreground/70">This portfolio category is unavailable. Return to the portfolio to choose another folder.</p>
+      <a href="index.html#other-creations" class="mt-6 inline-flex min-h-11 items-center gap-2 rounded-full bg-ink px-5 text-xs font-bold text-paper transition hover:-translate-y-0.5 hover:opacity-90">
+        Back to Other Creations <span class="material-symbols-rounded text-base" aria-hidden="true">north_east</span>
+      </a>
+    </div>
+
+    <section id="folder-content" class="mx-auto max-w-6xl">
+      <p class="mb-5 text-[10px] font-semibold uppercase tracking-[.2em] text-foreground/55">Portfolio <span class="mx-1 text-stone">/</span> Other Creations</p>
+      <div id="folder-hero" class="relative mb-9 flex min-h-64 items-end overflow-hidden rounded-3xl border border-paper/15 bg-gradient-to-br from-[#294239] via-[#1b2c25] to-[#11120f] p-6 sm:min-h-80 sm:p-10">
+        <div id="folder-hero-art" class="absolute inset-0 flex items-center justify-center" aria-hidden="true"></div>
+        <div class="absolute inset-0 bg-gradient-to-r from-[#11120f]/85 via-[#11120f]/45 to-transparent"></div>
+        <div class="relative z-10 max-w-2xl">
+          <span class="inline-flex items-center gap-2 rounded-full border border-stone/50 bg-stone/15 px-3 py-1.5 text-[9px] font-bold uppercase tracking-[.18em] text-paper">
+            <span class="size-1.5 rounded-full bg-stone" aria-hidden="true"></span> Selected collection
+          </span>
+          <h1 id="folder-title" class="mt-4 font-display text-4xl font-black uppercase leading-[.95] tracking-tight text-paper sm:text-6xl">Creative Work</h1>
+          <p id="folder-description" class="mt-3 max-w-xl text-sm leading-6 text-paper/75">A closer look at selected projects.</p>
+        </div>
+        <span id="folder-count" class="absolute right-5 top-5 z-10 rounded-full border border-white/25 bg-black/45 px-3 py-1.5 text-[9px] font-bold uppercase tracking-[.12em] text-white backdrop-blur-sm sm:right-8 sm:top-8"></span>
+      </div>
+
+      <div class="mb-5 flex items-center justify-between gap-4 border-b border-foreground/10 pb-4">
+        <h2 class="font-display text-xl font-bold uppercase tracking-wide text-foreground">Selected Projects</h2>
+        <p id="project-count" class="text-xs text-foreground/55"></p>
+      </div>
+      <div id="folder-projects" class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3"></div>
+    </section>
+  </main>
+
+  <footer class="border-t border-foreground/10 bg-ink px-6 py-6 text-center text-[11px] text-paper/60">
+    Creative work, with intention. <span aria-hidden="true">©</span> <span id="year"></span> Hanna Faith Adap
+  </footer>
+
+  <script src="creation-catalog.js"></script>
+  <script>
+    const themeToggle = document.getElementById("theme-toggle");
+    const themeIcon = document.getElementById("theme-icon");
+    const themeMeta = document.querySelector('meta[name="theme-color"]');
+
+    function setTheme(theme) {
+      const isDark = theme === "dark";
+      document.documentElement.dataset.theme = theme;
+      themeToggle.setAttribute("aria-pressed", String(isDark));
+      themeToggle.setAttribute("aria-label", isDark ? "Switch to light mode" : "Switch to dark mode");
+      themeToggle.title = isDark ? "Switch to light mode" : "Switch to dark mode";
+      themeIcon.textContent = isDark ? "light_mode" : "dark_mode";
+      themeMeta.content = isDark ? "#161916" : "#163B31";
+    }
+
+    const savedTheme = localStorage.getItem("hanna-portfolio-theme");
+    setTheme(savedTheme || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"));
+
+    themeToggle.addEventListener("click", () => {
+      const nextTheme = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+      localStorage.setItem("hanna-portfolio-theme", nextTheme);
+      setTheme(nextTheme);
+    });
+
+    const categoryId = new URLSearchParams(window.location.search).get("category");
+    const category = window.creationCategories.find((item) => item.id === categoryId);
+    const folderContent = document.getElementById("folder-content");
+    const folderNotFound = document.getElementById("folder-not-found");
+    const folderProjects = document.getElementById("folder-projects");
+
+    function getAssetUrl(path) {
+      return path.split("/").map((part) => encodeURIComponent(part)).join("/");
+    }
+
+    function createIcon(name, className) {
+      const icon = document.createElement("span");
+      icon.className = `material-symbols-rounded ${className}`;
+      icon.setAttribute("aria-hidden", "true");
+      icon.textContent = name;
+      return icon;
+    }
+
+    function createProjectCard(project) {
+      const extension = project.file.split(".").pop().toLowerCase();
+      const assetUrl = getAssetUrl(project.file);
+      const isImage = ["jpg", "jpeg", "png"].includes(extension);
+      const isVideo = ["mp4", "mov"].includes(extension);
+      const card = document.createElement("article");
+      card.className = "folder-project-card group overflow-hidden rounded-2xl border border-foreground/10 bg-ink/5 transition duration-300 hover:-translate-y-1 hover:border-stone/60 hover:bg-ink/10";
+
+      const media = document.createElement("div");
+      media.className = "relative aspect-[4/3] overflow-hidden bg-warm-white";
+      const previewLink = document.createElement("a");
+      previewLink.href = assetUrl;
+      previewLink.target = "_blank";
+      previewLink.rel = "noopener noreferrer";
+
+      if (isImage) {
+        previewLink.setAttribute("aria-label", `View ${project.title} in a new tab`);
+        const image = document.createElement("img");
+        image.className = "folder-project-image size-full object-contain";
+        image.src = assetUrl;
+        image.alt = project.title;
+        image.loading = "lazy";
+        previewLink.append(image);
+      } else {
+        previewLink.className = "flex size-full flex-col items-center justify-center gap-3 bg-gradient-to-br from-[#294239] via-[#1b2c25] to-[#11120f] text-center text-paper transition hover:from-[#345445]";
+        previewLink.setAttribute("aria-label", `${isVideo ? "Watch" : "Open"} ${project.title}`);
+        previewLink.append(createIcon(isVideo ? "play_circle" : category.icon, "text-5xl text-stone transition-transform group-hover:scale-110"));
+        const fileType = document.createElement("span");
+        fileType.className = "rounded-full border border-paper/20 px-3 py-1 text-[9px] font-bold uppercase tracking-[.18em] text-paper/75";
+        fileType.textContent = isVideo ? `${extension} video` : extension;
+        previewLink.append(fileType);
+      }
+      media.append(previewLink);
+
+      const details = document.createElement("div");
+      details.className = "p-4";
+      const title = document.createElement("h3");
+      title.className = "min-h-11 text-sm font-semibold leading-5 text-foreground";
+      title.textContent = project.title;
+      const action = document.createElement("a");
+      action.href = assetUrl;
+      action.target = "_blank";
+      action.rel = "noopener noreferrer";
+      action.className = "mt-3 inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-[.12em] text-foreground/65 transition hover:text-foreground";
+      action.setAttribute("aria-label", `${isImage ? "View design" : isVideo ? "Watch video" : "Open document"}: ${project.title}`);
+      action.textContent = isImage ? "View design" : isVideo ? "Watch video" : "Open document";
+      action.append(createIcon("north_east", "text-sm"));
+      details.append(title, action);
+      card.append(media, details);
+      return card;
+    }
+
+    if (category) {
+      document.title = `${category.label} | Hanna Faith Adap`;
+      document.getElementById("folder-title").textContent = category.label;
+      document.getElementById("folder-description").textContent = `Browse ${category.items.length} selected ${category.items.length === 1 ? "project" : "projects"} in this collection.`;
+      document.getElementById("folder-count").textContent = `${category.items.length} ${category.items.length === 1 ? "piece" : "pieces"}`;
+      document.getElementById("project-count").textContent = `${category.items.length} ${category.items.length === 1 ? "project" : "projects"}`;
+
+      const heroArt = document.getElementById("folder-hero-art");
+      if (category.thumbnail) {
+        const image = document.createElement("img");
+        image.className = "size-full object-cover opacity-45";
+        image.src = getAssetUrl(category.thumbnail);
+        image.alt = "";
+        image.setAttribute("aria-hidden", "true");
+        heroArt.append(image);
+      } else {
+        heroArt.append(createIcon(category.icon, "text-[12rem] text-stone/25"));
+      }
+
+      category.items.forEach((project) => folderProjects.append(createProjectCard(project)));
+    } else {
+      folderContent.hidden = true;
+      folderNotFound.classList.remove("hidden");
+    }
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

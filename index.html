@@ -70,6 +70,12 @@
       color: rgb(var(--paper) / .88);
       font-size: .75rem;
       line-height: 1rem;
+      transition: transform 220ms ease, border-color 220ms ease, background-color 220ms ease;
+    }
+    .tool-chip:hover {
+      transform: translateY(-3px);
+      border-color: rgb(var(--stone) / .65);
+      background: rgb(var(--paper) / .12);
     }
     .tool-chip img {
       width: 20px;
@@ -86,6 +92,17 @@
       transition: transform 650ms cubic-bezier(.2,.7,.2,1);
     }
     .social-card:hover .social-card-image { transform: scale(1.035); }
+    .creation-card-image { transition: transform 650ms cubic-bezier(.2,.7,.2,1); }
+    .creation-card:hover .creation-card-image { transform: scale(1.045); }
+    .creation-folder-cover { aspect-ratio: 1.28; }
+    .creation-folder-art { background: linear-gradient(135deg, #294239, #11120f); }
+    [data-category="cover-letter"] .creation-folder-art { background: radial-gradient(circle at 78% 24%, rgb(201 161 89 / .4), transparent 30%), linear-gradient(135deg, #31473d, #11120f 75%); }
+    [data-category="content-calendar"] .creation-folder-art { background-image: linear-gradient(rgb(201 161 89 / .12) 1px, transparent 1px), linear-gradient(90deg, rgb(201 161 89 / .12) 1px, transparent 1px), linear-gradient(135deg, #263d34, #11120f); background-size: 24px 24px, 24px 24px, auto; }
+    [data-category="client-recommendation-letter"] .creation-folder-art { background: radial-gradient(circle at 24% 78%, rgb(201 161 89 / .35), transparent 32%), linear-gradient(135deg, #455d4c, #17231d 75%); }
+    [data-category="certificate"] .creation-folder-art { background: radial-gradient(circle at 50% 50%, #f0dfb8 0 34%, transparent 35%), linear-gradient(135deg, #536d59, #17231d); }
+    [data-category="blogs"] .creation-folder-art { background: radial-gradient(circle at 75% 25%, rgb(201 161 89 / .32), transparent 27%), linear-gradient(135deg, #51483a, #171714 75%); }
+    [data-category="ai-contents"] .creation-folder-art { background: radial-gradient(circle at 50% 45%, rgb(201 161 89 / .3), transparent 38%), linear-gradient(135deg, #344d42, #131b17 78%); }
+    .creation-folder:hover .creation-folder-chevron { transform: translate(2px, -2px); }
 
     #services .service-grid { counter-reset: service; }
     #services .service-grid > article {
@@ -171,6 +188,15 @@
 
     .marquee-track { animation: marquee 34s linear infinite; }
     .marquee:hover .marquee-track { animation-play-state: paused; }
+    .reveal.is-visible .tool-chip { animation: chip-pop 550ms cubic-bezier(.2,.7,.2,1) both; }
+    .reveal.is-visible .tool-chip:nth-child(4n + 2) { animation-delay: 70ms; }
+    .reveal.is-visible .tool-chip:nth-child(4n + 3) { animation-delay: 140ms; }
+    .reveal.is-visible .tool-chip:nth-child(4n + 4) { animation-delay: 210ms; }
+    #services .reveal.is-visible > .material-symbols-rounded,
+    #credentials .reveal.is-visible > .material-symbols-rounded,
+    #tools .reveal.is-visible h3 > .material-symbols-rounded {
+      animation: icon-pop 600ms cubic-bezier(.2,.7,.2,1) both;
+    }
 
     .portrait-card img { transition: transform 900ms cubic-bezier(.2,.7,.2,1), filter 700ms ease; }
     .portrait-card:hover img { transform: scale(1.035); filter: saturate(1.08); }
@@ -180,13 +206,15 @@
 
     .reveal {
       opacity: 0;
-      transform: translateY(24px);
-      transition: opacity 750ms ease, transform 750ms cubic-bezier(.2,.7,.2,1);
+      transform: translate3d(0, 34px, 0) scale(.97);
+      filter: blur(4px);
+      transition: opacity 850ms ease, transform 850ms cubic-bezier(.2,.7,.2,1), filter 850ms ease;
     }
-    .reveal.is-visible { opacity: 1; transform: translateY(0); }
+    .reveal.is-visible { opacity: 1; transform: translate3d(0, 0, 0) scale(1); filter: blur(0); }
 
     .hero-enter { animation: hero-enter 950ms cubic-bezier(.2,.7,.2,1) both; }
     .hero-enter-delay { animation: hero-enter 950ms 160ms cubic-bezier(.2,.7,.2,1) both; }
+    .hero-cta-enter { animation: hero-enter 950ms 320ms cubic-bezier(.2,.7,.2,1) both; }
     .hero-shell {
       --portrait-shift-x: 0px;
       --portrait-shift-y: 0px;
@@ -223,6 +251,7 @@
       border-radius: 50%;
       content: "";
       pointer-events: none;
+      animation: orbit-drift 24s ease-in-out infinite alternate;
     }
     #top .hero-portrait {
       border-radius: 0;
@@ -235,11 +264,22 @@
       object-fit: cover;
       object-position: center 8%;
       mix-blend-mode: normal;
+      animation: portrait-enter 1200ms 120ms cubic-bezier(.2,.7,.2,1) both;
     }
     .hero-copy {
       left: max(5%, calc((100% - 1500px) / 2 + 56px));
       top: 29%;
       width: min(49%, 720px);
+    }
+    .hero-copy .hero-cta-enter { position: relative; isolation: isolate; }
+    .hero-copy .hero-cta-enter::after {
+      position: absolute;
+      inset: -3px;
+      border: 1px solid rgb(var(--paper) / .55);
+      border-radius: inherit;
+      content: "";
+      pointer-events: none;
+      animation: cta-ring 4.5s 1.4s ease-out infinite;
     }
     .hero-title {
       font-size: clamp(3.8rem, 6.5vw, 7rem);
@@ -247,15 +287,31 @@
       letter-spacing: -.07em;
     }
     .hero-title .name-line { display: block; }
-    .hero-outline {
-      color: transparent;
-      -webkit-text-stroke: 1.5px rgb(var(--paper));
-      text-stroke: 1.5px rgb(var(--paper));
-    }
+    .hero-title .name-accent { color: #d3a94e; letter-spacing: .02em; }
 
     @keyframes hero-enter {
       from { opacity: 0; transform: translateY(28px); }
       to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes portrait-enter {
+      from { opacity: 0; transform: translateY(24px) scale(1.035); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    @keyframes chip-pop {
+      from { opacity: 0; translate: 0 12px; scale: .88; }
+      to { opacity: 1; translate: 0 0; scale: 1; }
+    }
+    @keyframes icon-pop {
+      from { opacity: 0; scale: .65; rotate: -16deg; }
+      to { opacity: 1; scale: 1; rotate: 0deg; }
+    }
+    @keyframes cta-ring {
+      0% { opacity: .65; transform: scale(1); }
+      75%, 100% { opacity: 0; transform: scale(1.2); }
+    }
+    @keyframes orbit-drift {
+      from { transform: translate3d(-1%, 0, 0) rotate(-2deg); }
+      to { transform: translate3d(1%, -1.5%, 0) rotate(3deg); }
     }
     @keyframes marquee {
       from { transform: translateX(0); }
@@ -297,7 +353,9 @@
         scroll-behavior: auto !important;
         animation-duration: .01ms !important;
         animation-iteration-count: 1 !important;
+        animation-delay: 0ms !important;
         transition-duration: .01ms !important;
+        transition-delay: 0ms !important;
       }
       .reveal { opacity: 1; transform: none; }
     }
@@ -312,7 +370,7 @@
       <img class="h-full w-full object-cover object-top mix-blend-multiply" src="images/hanna1.png" alt="Hanna Faith Adap portrait" fetchpriority="high">
     </div>
 
-    <div class="relative z-20 mx-auto flex w-full max-w-[1500px] items-start justify-between gap-4 px-6 pt-7 sm:px-10 md:px-14 md:pt-12">
+    <div class="hero-enter-delay relative z-20 mx-auto flex w-full max-w-[1500px] items-start justify-between gap-4 px-6 pt-7 sm:px-10 md:px-14 md:pt-12">
       <address class="space-y-2 not-italic text-[11px] font-medium leading-tight text-white/85 sm:text-xs">
         <a class="flex items-center gap-2 transition hover:text-paper" href="tel:09067206088">
           <span class="material-symbols-rounded text-[16px] text-paper">call</span>
@@ -343,12 +401,12 @@
       <p class="mb-3 text-[9px] font-semibold uppercase tracking-[.18em] text-[#d3a94e] sm:mb-4 sm:text-[11px] sm:tracking-[.22em]">Creative &amp; Virtual Support</p>
       <h1 class="hero-title hero-enter font-display font-extrabold uppercase text-paper">
         <span class="name-line">Hanna Faith</span>
-        <span class="hero-outline name-line">Adap</span>
+        <span class="name-accent name-line">Adap</span>
       </h1>
       <p class="hero-enter-delay mt-3 max-w-sm text-[11px] font-medium leading-relaxed text-white/85 sm:mt-5 sm:text-sm">
         Thoughtful visuals, meaningful stories, and creative support for brands ready to grow.
       </p>
-      <a href="#contact" class="mt-4 inline-flex min-h-9 items-center gap-2 rounded-full bg-paper px-4 text-[10px] font-bold text-ink transition hover:-translate-y-0.5 hover:bg-white sm:mt-6 sm:min-h-11 sm:px-5 sm:text-xs">
+      <a href="#contact" class="hero-cta-enter mt-4 inline-flex min-h-9 items-center gap-2 rounded-full bg-paper px-4 text-[10px] font-bold text-ink transition hover:-translate-y-0.5 hover:bg-white sm:mt-6 sm:min-h-11 sm:px-5 sm:text-xs">
         Let’s talk <span class="material-symbols-rounded text-sm">arrow_forward</span>
       </a>
     </div>
@@ -494,9 +552,9 @@
     <section id="social-pages" class="bg-warm-white px-5 py-16 text-foreground sm:px-8 sm:py-24 lg:px-12">
       <div class="mx-auto max-w-6xl">
         <div class="reveal mb-9 max-w-2xl">
-          <p class="mb-3 text-xs font-semibold uppercase tracking-[.25em] text-stone">Selected client accounts</p>
-          <h2 class="font-display text-5xl font-black uppercase leading-none tracking-tight text-foreground sm:text-6xl">Social Media Pages</h2>
-          <p class="mt-4 text-sm leading-7 text-foreground/75 sm:text-base">A selection of social pages and campaigns I’ve supported across different industries.</p>
+          <p class="mb-3 text-xs font-semibold uppercase tracking-[.25em] text-stone">Explore my work</p>
+          <h2 class="font-display text-4xl font-black uppercase leading-none tracking-tight text-foreground sm:text-6xl">Graphic Designs &amp;<br class="sm:hidden"> Content Creation</h2>
+          <p class="mt-4 text-sm leading-7 text-foreground/75 sm:text-base">Click through the social pages below to explore published content and brand visuals from accounts I’ve supported.</p>
         </div>
         <div class="reveal mb-8 overflow-hidden rounded-3xl bg-ink p-5 text-paper shadow-[0_24px_70px_rgba(23,23,21,.14)] sm:p-8 lg:p-10">
           <div class="grid gap-7 lg:grid-cols-[.8fr_1.2fr] lg:items-center">
@@ -505,7 +563,7 @@
                 <span class="size-1.5 rounded-full bg-stone"></span> Recent client · The Icing Agency
               </span>
               <h3 class="mt-5 font-display text-3xl font-black uppercase leading-[.95] tracking-tight sm:text-4xl">Featured social accounts</h3>
-              <p class="mt-3 max-w-md text-sm leading-6 text-paper/70">A selection of Instagram pages connected with my recent work at The Icing Agency.</p>
+              <p class="mt-3 max-w-md text-sm leading-6 text-paper/70">Visit these Instagram pages to see brand content created for clients, including my recent work with The Icing Agency.</p>
               <a href="https://share.google/dVdysJCSRmJmBXJI1" target="_blank" rel="noopener noreferrer" class="mt-5 inline-flex items-center gap-2 rounded-full bg-paper px-4 py-2.5 text-xs font-bold text-ink transition hover:-translate-y-0.5 hover:bg-white">
                 Visit The Icing Agency <span class="material-symbols-rounded text-base" aria-hidden="true">north_east</span>
               </a>
@@ -567,6 +625,63 @@
             <div class="overflow-hidden"><img class="social-card-image" src="images/social/spotify.png" alt="Preview of the Spotify podcast page" loading="lazy"></div>
             <div class="flex items-center gap-3 p-4"><img class="size-9 rounded-xl bg-white p-1.5 object-contain" src="images/tools/spotify.png" alt="" loading="lazy"><span class="min-w-0 flex-1"><span class="block text-[10px] font-semibold uppercase tracking-[.15em] text-foreground/55">Spotify</span><span class="mt-1 block font-semibold text-foreground">Podcast Show</span></span><span class="material-symbols-rounded text-lg text-stone transition-transform group-hover:translate-x-1">north_east</span></div>
           </a>
+        </div>
+      </div>
+    </section>
+
+    <section id="other-creations" class="bg-ink px-5 py-16 sm:px-8 sm:py-24 lg:px-12">
+      <div class="mx-auto max-w-6xl">
+        <div class="reveal mb-9 max-w-2xl">
+          <p class="mb-3 text-xs font-semibold uppercase tracking-[.25em] text-paper/70">Selected creative work</p>
+          <h2 class="font-display text-5xl font-black uppercase leading-none tracking-tight text-paper sm:text-6xl">Other Creations</h2>
+          <p class="mt-4 text-sm leading-7 text-white/70 sm:text-base">Browse projects by category, from social content and brand visuals to client documents and AI video.</p>
+        </div>
+        <div class="reveal mb-8 overflow-hidden rounded-3xl border border-paper/15 bg-gradient-to-br from-[#294239] via-[#1b2c25] to-[#11120f] p-6 sm:p-8">
+          <div class="grid gap-6 sm:grid-cols-[1fr_auto] sm:items-end">
+            <div>
+              <span class="inline-flex items-center gap-2 rounded-full border border-stone/50 bg-stone/15 px-3 py-1.5 text-[9px] font-bold uppercase tracking-[.18em] text-paper">
+                <span class="size-1.5 rounded-full bg-stone" aria-hidden="true"></span> Made with intention
+              </span>
+              <h3 class="mt-4 font-display text-2xl font-bold uppercase tracking-wide text-paper sm:text-3xl">A little bit of everything, made for a purpose.</h3>
+              <p class="mt-2 max-w-2xl text-sm leading-7 text-paper/70">Open a folder card to browse its projects, then choose any design, document, or video to view it in full.</p>
+            </div>
+            <div class="flex gap-6 sm:gap-8">
+              <div><p id="creation-project-total" class="font-display text-3xl font-black text-paper sm:text-4xl">0</p><p class="text-[9px] font-semibold uppercase tracking-[.18em] text-paper/60">Projects</p></div>
+              <div><p id="creation-category-total" class="font-display text-3xl font-black text-stone sm:text-4xl">0</p><p class="text-[9px] font-semibold uppercase tracking-[.18em] text-paper/60">Categories</p></div>
+            </div>
+          </div>
+        </div>
+        <p id="creation-count" class="reveal mb-5 text-xs text-paper/55" role="status" aria-live="polite">Choose a folder to browse its projects.</p>
+        <div id="creation-folders" class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"></div>
+      </div>
+    </section>
+
+    <section id="credentials" class="bg-warm-white px-5 py-16 text-foreground sm:px-8 sm:py-24 lg:px-12">
+      <div class="mx-auto max-w-6xl">
+        <div class="reveal mb-9 max-w-2xl">
+          <p class="mb-3 text-xs font-semibold uppercase tracking-[.25em] text-stone">Credentials &amp; kind words</p>
+          <h2 class="font-display text-4xl font-black uppercase leading-none tracking-tight text-foreground sm:text-6xl">Certifications &amp;<br class="sm:hidden"> Recommendations</h2>
+          <p class="mt-4 text-sm leading-7 text-foreground/75 sm:text-base">Explore my professional certifications and client recommendation letters.</p>
+        </div>
+        <div class="grid gap-4 md:grid-cols-2">
+          <article class="reveal flex flex-col items-start rounded-2xl border border-foreground/10 bg-ink/5 p-6 sm:p-8">
+            <span class="material-symbols-rounded text-3xl text-stone" aria-hidden="true">workspace_premium</span>
+            <h3 class="mt-4 font-display text-2xl font-bold uppercase text-foreground">Certifications</h3>
+            <p class="mt-2 text-sm leading-7 text-foreground/70">View my professional certificate.</p>
+            <a href="other-creations/certificate/Hanna%20Faith%20Adap.pdf" target="_blank" rel="noopener noreferrer" class="mt-5 inline-flex min-h-11 items-center gap-2 rounded-full bg-ink px-5 text-xs font-bold text-paper transition hover:-translate-y-0.5 hover:bg-foreground">
+              View Certificate <span class="material-symbols-rounded text-base" aria-hidden="true">north_east</span>
+            </a>
+          </article>
+          <article class="reveal flex flex-col items-start rounded-2xl border border-foreground/10 bg-ink/5 p-6 sm:p-8" style="transition-delay: 80ms">
+            <span class="material-symbols-rounded text-3xl text-stone" aria-hidden="true">rate_review</span>
+            <h3 class="mt-4 font-display text-2xl font-bold uppercase text-foreground">Client Recommendations</h3>
+            <p class="mt-2 text-sm leading-7 text-foreground/70">Read a client recommendation letter or browse the full collection.</p>
+            <div class="mt-5 flex flex-wrap gap-2">
+              <a href="other-creations/client-recommendation-letter/TYPODUCTION%20-%20Letter%20of%20Rec.docx.pdf" target="_blank" rel="noopener noreferrer" class="inline-flex min-h-11 items-center gap-2 rounded-full bg-ink px-5 text-xs font-bold text-paper transition hover:-translate-y-0.5 hover:bg-foreground">
+                Read Letter <span class="material-symbols-rounded text-base" aria-hidden="true">north_east</span>
+              </a>
+            </div>
+          </article>
         </div>
       </div>
     </section>
@@ -637,14 +752,14 @@
 
         <div class="reveal mt-10 grid gap-8 border-t border-white/15 pt-8 lg:grid-cols-[1.15fr_.85fr] lg:items-center" style="transition-delay: 180ms">
           <p class="max-w-2xl text-sm leading-7 text-white/70 sm:text-base sm:leading-8">
-            Read my cover letter to learn more about my approach, or view my resume for an overview of my experience and skills.
+            Read my cover letter to learn more about my approach, or watch my resume video for an overview of my experience and skills.
           </p>
           <div class="grid gap-3 sm:grid-cols-2 sm:gap-4">
-            <a href="mailto:hannafaithadap02@gmail.com?subject=Cover%20letter%20request" class="group inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-paper/80 px-4 text-center text-xs font-semibold text-paper transition duration-300 hover:-translate-y-1 hover:bg-paper hover:text-ink sm:text-sm">
+            <a href="other-creations/cover-letter/Hanna%20Adap%20Cover%20Letter%20.pdf" target="_blank" rel="noopener noreferrer" class="group inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-paper/80 px-4 text-center text-xs font-semibold text-paper transition duration-300 hover:-translate-y-1 hover:bg-paper hover:text-ink sm:text-sm">
               <span class="material-symbols-rounded text-lg">draft</span>Cover Letter
             </a>
-            <a href="https://docs.google.com/document/d/1k1zokh7WTB786Bfx8_4laASTi_VlnhgX2dyN5rgPHgY/edit?usp=sharing" target="_blank" rel="noopener noreferrer" class="group inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-paper px-4 text-center text-xs font-semibold text-ink shadow-lg shadow-black/10 transition duration-300 hover:-translate-y-1 hover:bg-white sm:text-sm">
-              <span class="material-symbols-rounded text-lg">description</span>Resume
+            <a href="video/RESUME.mp4" target="_blank" rel="noopener noreferrer" class="group inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-paper px-4 text-center text-xs font-semibold text-ink shadow-lg shadow-black/10 transition duration-300 hover:-translate-y-1 hover:bg-white sm:text-sm">
+              <span class="material-symbols-rounded text-lg">play_circle</span>Resume Video
             </a>
           </div>
         </div>
@@ -719,17 +834,26 @@
     </section>
   </main>
 
-  <footer class="border-t border-white/10 bg-ink px-6 py-7 text-paper/70 sm:px-10">
-    <div class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 text-center sm:flex-row sm:text-left">
-      <a href="#top" class="font-display text-lg font-bold uppercase tracking-wide text-paper">Hanna Faith Adap</a>
-      <p class="text-[11px]">Creative work, with intention. <span aria-hidden="true">©</span> <span id="year"></span> Hanna Faith Adap</p>
-      <a href="#contact" class="inline-flex items-center gap-1 text-xs transition hover:text-white">
-        Get in touch <span class="material-symbols-rounded text-base">north_east</span>
-      </a>
+  <footer class="bg-[#163B31] text-[#F0ECE1]">
+    <div class="reveal mx-auto max-w-6xl px-6 py-9 sm:px-10 sm:py-10">
+      <div class="flex flex-col items-center justify-between gap-6 border-b border-[#F0ECE1]/15 pb-7 text-center sm:flex-row sm:text-left">
+        <div>
+          <a href="#top" class="font-display text-lg font-bold uppercase tracking-wide">Hanna Faith Adap</a>
+          <p class="mt-1 text-xs text-[#F0ECE1]/70">Social Media Manager | Content Creator | Graphic Designer</p>
+        </div>
+        <a href="#contact" class="inline-flex min-h-11 items-center gap-2 rounded-full border border-[#F0ECE1]/35 px-5 text-xs font-semibold transition hover:bg-[#F0ECE1] hover:text-[#163B31]">
+          Get in touch <span class="material-symbols-rounded text-base" aria-hidden="true">north_east</span>
+        </a>
+      </div>
+      <div class="flex flex-col items-center justify-between gap-2 pt-5 text-center text-[11px] text-[#F0ECE1]/70 sm:flex-row sm:text-left">
+        <p>Creative work, with intention.</p>
+        <p><span aria-hidden="true">©</span> <span id="year"></span> Hanna Faith Adap. All rights reserved.</p>
+      </div>
     </div>
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="creation-catalog.js"></script>
   <script>
     const themeToggle = document.getElementById("theme-toggle");
     const themeIcon = document.getElementById("theme-icon");
@@ -878,16 +1002,99 @@
       });
     }
 
-    const revealObserver = new IntersectionObserver((entries, observer) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("is-visible");
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.12 });
+    const creationCategories = window.creationCategories;
 
-    document.querySelectorAll(".reveal").forEach((element) => revealObserver.observe(element));
+    const creationFolders = document.getElementById("creation-folders");
+    const creationCount = document.getElementById("creation-count");
+    const creationProjects = creationCategories.flatMap((category) =>
+      category.items.map((item) => ({ ...item, category }))
+    );
+
+    function getCreationAssetUrl(path) {
+      return path.split("/").map((part) => encodeURIComponent(part)).join("/");
+    }
+
+    function createCreationIcon(name, className) {
+      const icon = document.createElement("span");
+      icon.className = `material-symbols-rounded ${className}`;
+      icon.setAttribute("aria-hidden", "true");
+      icon.textContent = name;
+      return icon;
+    }
+
+    function createCreationFolder(category) {
+      const folder = document.createElement("a");
+      folder.href = `creation-folder.html?category=${encodeURIComponent(category.id)}`;
+      folder.target = "_blank";
+      folder.rel = "noopener noreferrer";
+      folder.className = "creation-folder reveal group block overflow-hidden rounded-3xl border border-paper/10 bg-paper/[.04] transition duration-300 hover:-translate-y-1 hover:border-stone/60 hover:bg-paper/[.07]";
+      folder.dataset.category = category.id;
+
+      const cover = document.createElement("span");
+      cover.className = "creation-folder-cover relative block overflow-hidden bg-[#f0ece1]";
+
+      if (category.thumbnail) {
+        const image = document.createElement("img");
+        image.className = "creation-card-image size-full object-cover";
+        image.src = getCreationAssetUrl(category.thumbnail);
+        image.alt = `${category.label} portfolio thumbnail`;
+        image.loading = "lazy";
+        cover.append(image);
+      } else {
+        const artwork = document.createElement("span");
+        artwork.className = "creation-folder-art absolute inset-0 flex flex-col items-center justify-center gap-3 text-center";
+        artwork.append(createCreationIcon(category.icon, "text-6xl text-stone drop-shadow-lg transition-transform group-hover:scale-110"));
+        const artLabel = document.createElement("span");
+        artLabel.className = "text-[9px] font-bold uppercase tracking-[.24em] text-paper/70";
+        artLabel.textContent = "Selected Work";
+        artwork.append(artLabel);
+        cover.append(artwork);
+      }
+
+      const imageOverlay = document.createElement("span");
+      imageOverlay.className = "pointer-events-none absolute inset-0 bg-gradient-to-t from-black/80 via-black/5 to-transparent";
+      const projectCount = document.createElement("span");
+      projectCount.className = "absolute right-3 top-3 rounded-full border border-white/25 bg-black/45 px-3 py-1 text-[9px] font-bold uppercase tracking-[.12em] text-white backdrop-blur-sm";
+      projectCount.textContent = `${category.items.length} ${category.items.length === 1 ? "piece" : "pieces"}`;
+      const coverTitle = document.createElement("span");
+      coverTitle.className = "absolute bottom-4 left-4 right-4 font-display text-xl font-black uppercase leading-tight tracking-wide text-white drop-shadow-lg";
+      coverTitle.textContent = category.label;
+      cover.append(imageOverlay, projectCount, coverTitle);
+
+      const folderFooter = document.createElement("span");
+      folderFooter.className = "flex items-center justify-between gap-3 p-4";
+      const folderLabel = document.createElement("span");
+      folderLabel.className = "text-[10px] font-semibold uppercase tracking-[.15em] text-paper/65";
+      folderLabel.textContent = "Open in new tab";
+      const arrow = createCreationIcon("north_east", "creation-folder-chevron text-xl text-stone transition-transform duration-300");
+      folderFooter.append(folderLabel, arrow);
+      folder.append(cover, folderFooter);
+      return folder;
+    }
+
+    creationCategories.forEach((category) => {
+      creationFolders.append(createCreationFolder(category));
+    });
+
+    document.getElementById("creation-project-total").textContent = String(creationProjects.length);
+    document.getElementById("creation-category-total").textContent = String(creationCategories.length);
+    creationCount.textContent = `Open a folder to explore ${creationProjects.length} projects across ${creationCategories.length} categories.`;
+
+    const revealElements = document.querySelectorAll(".reveal");
+    if (reducedMotion.matches || !("IntersectionObserver" in window)) {
+      revealElements.forEach((element) => element.classList.add("is-visible"));
+    } else {
+      const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12 });
+
+      revealElements.forEach((element) => revealObserver.observe(element));
+    }
   </script>
 </body>
 </html>
